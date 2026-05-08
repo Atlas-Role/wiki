@@ -1,0 +1,108 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Xiphos — Westmarch Wiki</title><style>
+:root{--bg:#1e1f22;--bg-2:#2b2d31;--bg-3:#313338;--fg:#dbdee1;--fg-muted:#949ba4;--accent:#5865f2;--border:#1f2023;--link:#00a8fc;
+--c-city:#3aa1ff;--c-place:#5cb8ff;--c-person:#ff8b3a;--c-org:#a972ff;--c-event:#23a55a;--c-concept:#80848e;--c-astro:#fbbf24;--c-sage:#dc2626;--c-world:#10b981}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font-family:'gg sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;font-size:15px;line-height:1.55}
+a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
+.wrap{max-width:1100px;margin:0 auto;padding:24px 28px 80px}
+.entity-head{margin-bottom:16px}.entity-head h1{margin:0 0 4px;font-size:26px}
+.entity-head .type-badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;margin-bottom:8px}
+.entity-head .desc{color:var(--fg-muted);font-style:italic;font-size:14px;margin:6px 0}
+.btn{background:var(--bg-3);padding:6px 12px;border-radius:6px;font-size:13px;display:inline-block;margin-right:6px}
+.section{background:var(--bg-2);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-bottom:16px}
+.section h2{margin:0 0 12px;font-size:17px;border-bottom:1px solid var(--border);padding-bottom:8px}
+.body-text p{margin:0 0 10px}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.related-card{background:var(--bg-3);border:1px solid var(--border);border-radius:6px;padding:10px 12px;font-size:13px;display:block;color:var(--fg)}
+.related-card:hover{border-color:var(--accent);text-decoration:none}
+.related-card .name{font-weight:600}.related-card .meta{font-size:11px;color:var(--fg-muted);margin-top:2px}
+.see-also{background:linear-gradient(135deg,#1f1d2e 0%,#2b2d31 100%);border:1px dashed var(--border);border-radius:10px;padding:18px 22px;margin-bottom:16px;margin-top:24px}
+.see-also h2{margin:0 0 4px;font-size:17px;border:0;padding-bottom:0;color:var(--fg)}
+.see-also .lead{color:var(--fg-muted);font-size:12px;margin:0 0 12px;font-style:italic}
+.see-also .related-grid{grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px}
+.see-also .related-card{background:rgba(0,0,0,.25)}
+.see-also .related-card:hover{border-color:#fbbf24}
+.el{padding:1px 2px;border-radius:3px;font-weight:500}
+.el-city{color:#3aa1ff;background:rgba(58,161,255,.08)}.el-place{color:#5cb8ff;background:rgba(92,184,255,.08)}
+.el-person{color:#ff8b3a;background:rgba(255,139,58,.1)}.el-org{color:#a972ff;background:rgba(169,114,255,.1)}
+.el-event{color:#23a55a;background:rgba(35,165,90,.1)}.el-concept{color:#a3a8ad;background:rgba(128,132,142,.12)}
+.el-astro{color:#fbbf24;background:rgba(251,191,36,.1)}.el-sage{color:#dc2626;background:rgba(220,38,38,.1)}
+.el-world{color:#10b981;background:rgba(16,185,129,.1)}
+.el:hover{filter:brightness(1.3);text-decoration:underline}
+.discord-msg{display:flex;gap:12px;padding:8px 0;border-top:1px solid var(--border)}
+.discord-msg:first-child{border-top:0}
+.discord-msg .avatar{width:34px;height:34px;border-radius:50%;flex-shrink:0;background:var(--bg-3)}
+.discord-msg .body{flex:1;min-width:0}.discord-msg .head{font-size:12px;color:var(--fg-muted);margin-bottom:4px}
+.discord-msg .head .name{color:#fff;font-weight:600;margin-right:8px}
+.attachments{margin-top:8px;display:flex;flex-direction:column;gap:8px}
+.att-img{max-width:380px;max-height:280px;border-radius:6px;display:block;border:1px solid var(--border)}
+.att-file{display:inline-block;background:var(--bg-3);padding:6px 10px;border-radius:6px;border:1px solid var(--border);font-size:12px}
+.menubar{position:sticky;top:0;background:var(--bg-2);border-bottom:1px solid var(--border);padding:10px 28px;display:flex;gap:12px;font-size:13px;z-index:10;flex-wrap:wrap;align-items:center}
+.menubar .home{font-weight:700;margin-right:8px}.menubar a{color:var(--fg-muted)}
+@media(max-width:700px){.wrap{padding:14px 16px 60px}.menubar{padding:10px 16px}}
+</style></head><body><div class="menubar">
+<a class="home" href="index.html">🌍 Westmarch Wiki</a>
+<a href="index.html#cities">Città</a><a href="index.html#astri">Astri</a>
+<a href="index.html#sages">Saggi</a><a href="index.html#orgs">Organizzazioni</a>
+<a href="index.html#places">Luoghi</a><a href="index.html#persons">Persone</a>
+<a href="mappa_concettuale.html">Mappa</a>
+</div><div class="wrap"><div class="entity-head"><span class="type-badge" style="background:#3aa1ff33;color:#3aa1ff">Città</span><h1>Xiphos</h1><p class="desc">Città di Regolo, della guerra e della gloria</p><div style="margin-top:8px"><a class="btn" href="https://docs.google.com/document/d/1eQaQYsB0DkATfF4ehOCNirUUM8ngqYtgEJ13r16mWv0/edit" target="_blank" rel="noopener">📄 Drive</a></div></div><div class="section"><h2>Descrizione</h2><div class="body-text"><p>Xiphos - Città Fortezza[IMAGE]<br>Xiphos è una città imponente, circondata da alte e spesse mura e torrioni, a vederla pare di osservare un gigantesco castello brulicante di soldati e guerrieri.La città di Xiphos si trova in un territorio pianeggiante molto fertile con più sbocchi a mare, questo la rende un colosso rispetto a molte altre città dal punto di vista demografico ed economico.<br>L’astro di Xiphos è <a class="el el-astro" href="astro-regolo.html" title="Astro della guerra e della gloria di Xiphos">Regolo</a>, i suoi domini sono la guerra e la gloria e la città incarna pienamente questi ideali; a Xiphos si ricerca la perfezione individuale e l’ideale del superuomo, con l’ovvia conseguenza che, spesso, i più deboli vengono lasciati indietro, nonostante l’ethos di Regolo vorrebbe i migliori trascinatori dei peggiori verso la grandezza.<br>La città estende i propri domini come un’ impero su moltissime province e villaggi all’interno della penisola in cui si trova e presiede da circa un secolo un’ alleanza di carattere commerciale e/o militare con <a class="el el-city" href="city-mizu.html" title="Città dell&#x27;Alrisha, dell&#x27;acqua e dei legami">Mizu</a>, <a class="el el-city" href="city-ahi-koati.html" title="Città di Hamal, del fuoco e della forza">Ahi Koati</a>, <a class="el el-city" href="city-atua-rua.html" title="Città di Castore e Polluce, dell&#x27;anima duplice">Atua Rua</a> e <a class="el el-city" href="city-mnemia.html" title="Città di Aldebaran, della memoria">Mnemia</a> per fronteggiare la città di <a class="el el-city" href="city-lingra.html" title="Città di Deneb Algedi, capitale dell&#x27;Impero">Lingra</a>.<br>La Guerra Secolare<br>Le province di Xiphos confinano direttamente con quelle di Lingra da svariati secoli.<br>Inizialmente i due regni erano composti da tribù guerriere in lotta tra di loro ma la costituzione di Xiphos come città sotto il primo Regolo ha causato la fondazione di Lingra come risposta e l’astro <a class="el el-astro" href="astro-deneb-algedi.html" title="Astro della guerra e dell&#x27;unità di Lingra">Deneb Algedi</a> è comparso in città poco dopo.<br>Per secoli i due popoli hanno convissuto come vicini litigiosi, con occasionali scaramucce ma principalmente in pace, scontrandosi più a pugni nelle locande sul confine che con le spade in campo aperto.<br>Alla fine della seconda era tra Xiphos e Lingra si era raggiunta la situazione più vicina ad una pace che le due città abbiano mai visto; i conflitti aperti erano spariti mentre il razzismo e la diffidenza venivano sedate in giochi gladiatori e competizioni di vario tipo che permettevano ai popoli di sfogare gli asti secolari senza raggiungere la guerra.<br>Giunge il tempo della “caduta”, i popoli si impigriscono, gli astri iniziano a cadere e Xiphos e Lingra non fanno eccezione.In questo clima difficile Regolo e Deneb Algedi si incontrano in segreto e studiano insieme un piano per rinvigorire i propri popoli e non subire il destino che altre città come Mizu e <a class="el el-city" href="city-nakahi.html" title="Capitale di Ras Alhague, città degli avventurieri">Nakahi</a> hanno già subito.<br>L’agire degli astri è drastico ma funziona: le due città entrano in guerra, inventando finti casus belli per riaccendere il fuoco della lotta che è sopito, ma non estinto, nel cuore dei cittadini di entrambi i fronti.<br>Secondo il piano stilato dagli astri la guerra dovrebbe durare qualche decina d’anni, al massimo un secolo, con pochi grandi scontri e molte scaramucce, in modo da cambiare qualche generazione mentre il popolo si mantiene vigile ed allenato prima di firmare una pace e riprendere con i giochi come riparazione ma qualcosa non va come atteso.<br>Nel terzo anno della terza era Deneb Algedi viene assassinato e rimpiazzato.<br>Regolo si trova in una situazione spinosa, i due astri hanno peccato di superbia, stilando il patto con la <a class="el el-concept" href="concept-magia-astrale.html" title="Fonte di potere unica degli Astri, slot equivalenti a 15° livello">magia astrale</a> e imponendosi un vincolo di silenzio con “chiunque sia loro inferiore” e ora lui non può spezzare il vincolo per tentare di parlamentare né smettere di mandare in guerra i suoi uomini e le sue donne.<br>Dal lato Lingrano l’assassinio dell’astro manda in subbuglio la catena di comando e indebolisce tutta la struttura governativa e militare del paese; fatto che torna comodo a Regolo il quale riduce lo sforzo bellico per eguagliare quello Lingrano e porta lo scontro ad uno stato di guerra fredda che dura circa quattro secoli e mezzo.<br>Per secoli il fronte avanza e arretra scosso dai tentativi di prevalere dei due popoli che ormai si odiano ferocemente ma manca di grandi scontri significativi, con poche eccezioni di cui i bardi cantano ancora oggi; questo avviene principalmente per l’incapacità a governare di Deneb Algedi che è sempre più ossessionato dalla vittoria. L’astro di Lingra è abile ma è un guerrafondaio e curare troppo poco gli aspetti civili della vita di una città grande come Lingra sarà la sua rovina.<br>Nel 446 della terza era Deneb Algedi viene sostituito da una prescelta dal <a class="el el-concept" href="concept-quadranti.html" title="Antichi artefatti magici che selezionano i candidati Astro">quadrante</a> che è stata guidata al tempio proprio dall’oggetto magico.<br>Con l’ascesa al trono di quella che verrà conosciuta come la “Regina Guerriera” di Lingra la guerra si riaccende; l’esercito è organizzato e motivato dal miglioramento della vita cittadina e, in più occasioni, la regina si schiera in prima linea costringendo Regolo a scendere in battaglia a sua volta.<br>Questa situazione continua con perdite catastrofiche da entrambi i lati per quasi altri tre secoli finchè, nel secondo anno della quarta era, ad un summit degli astri, viene dichiarata una tregua per affrontare la minaccia di Rockhar Thorà, <a class="el el-astro" href="astro-aldebaran.html" title="Astro della terra e della memoria di Mnemia (ex re Rokhar Thorà, fuso con Cerebrax)">Aldebaran</a> illegittimo.<br>SCHEDA CARATTERISTICHE:Bioma e Geografia: Xiphos sorge in una pianura fertile, con parecchi fiumi e affluenti che permettono svariati sbocchi sul mare. A sud, il regno è boschivo per poi fondersi con le foreste Lingrane.Architettura: Classica Ellenistica, Roma ImperialeGoverno: Monarchia AssolutaOrgani Armati: Molteplici e diversificati, dagli Ordini di Paladini alle Guardie Reali, dalle Compagnie Gladiatorie agli Incursori.Religione: Fervente Mentalità: Ricerca del superuomo, gli abitanti di Xiphos valutano il valore individuale più di tutto, che non solamente significa la forza in combattimento ma qualsiasi talento o competenza superiore alla media che contribuisca alla società. L’Eccellenza è ricercata in ogni ambito, anche se a volte questo porta gli Xiphosiani e ricercare la Gloria e la Fama, il che li allontana dai propri principi e rischia di farli diventare boriosi.Economia: Piuttosto fiorente, Xiphos fa dell’industria della guerra la sua principale fonte di guadagno e nonostante il regno faccia parte dell’Alleanza dell’Altopiano, rimane in maniera ufficiosa il regno di punta, araldico di tale Alleanza, e quindi considerato più potente rispetto ai propri alleati.Popolazione e Territorio: Xiphos è una città popolosa, arroccata sul colle e dietro le sue imponenti mura, ma la popolazione del regno si estende anche in numerose regioni limitrofe e periferiche alla capitale, chiamate “Pars”, zone simili a dei feudi con dei Paladini o Cavalieri a fungere come signori locali e feudatari.Lingua di Ispirazione: Greco</p></div></div><div class="section"><h2>Cita (11)</h2><div class="related-grid"><a class="related-card" href="city-lingra.html">
+<div class="name"><span class="el el-city" style="padding:0">Lingra</span> <span style="color:var(--fg-muted)">×8</span></div>
+<div class="meta">Città · Città di Deneb Algedi, capitale dell&#x27;Impero</div></a>
+<a class="related-card" href="astro-regolo.html">
+<div class="name"><span class="el el-astro" style="padding:0">Regolo</span> <span style="color:var(--fg-muted)">×7</span></div>
+<div class="meta">Astro · Astro della guerra e della gloria di Xiphos</div></a>
+<a class="related-card" href="astro-deneb-algedi.html">
+<div class="name"><span class="el el-astro" style="padding:0">Deneb Algedi</span> <span style="color:var(--fg-muted)">×5</span></div>
+<div class="meta">Astro · Astro della guerra e dell&#x27;unità di Lingra</div></a>
+<a class="related-card" href="city-mizu.html">
+<div class="name"><span class="el el-city" style="padding:0">Mizu</span> <span style="color:var(--fg-muted)">×2</span></div>
+<div class="meta">Città · Città dell&#x27;Alrisha, dell&#x27;acqua e dei legami</div></a>
+<a class="related-card" href="concept-magia-astrale.html">
+<div class="name"><span class="el el-concept" style="padding:0">Magia Astrale</span> <span style="color:var(--fg-muted)">×1</span></div>
+<div class="meta">Concetto · Fonte di potere unica degli Astri, slot equivalenti a 15° livello</div></a>
+<a class="related-card" href="city-ahi-koati.html">
+<div class="name"><span class="el el-city" style="padding:0">Ahi Koati</span> <span style="color:var(--fg-muted)">×1</span></div>
+<div class="meta">Città · Città di Hamal, del fuoco e della forza</div></a>
+<a class="related-card" href="astro-aldebaran.html">
+<div class="name"><span class="el el-astro" style="padding:0">Aldebaran</span> <span style="color:var(--fg-muted)">×1</span></div>
+<div class="meta">Astro · Astro della terra e della memoria di Mnemia (ex re Rokhar Thorà, fuso con Cerebrax)</div></a>
+<a class="related-card" href="concept-quadranti.html">
+<div class="name"><span class="el el-concept" style="padding:0">I Quadranti</span> <span style="color:var(--fg-muted)">×1</span></div>
+<div class="meta">Concetto · Antichi artefatti magici che selezionano i candidati Astro</div></a>
+<a class="related-card" href="city-atua-rua.html">
+<div class="name"><span class="el el-city" style="padding:0">Atua Rua</span> <span style="color:var(--fg-muted)">×1</span></div>
+<div class="meta">Città · Città di Castore e Polluce, dell&#x27;anima duplice</div></a>
+<a class="related-card" href="city-nakahi.html">
+<div class="name"><span class="el el-city" style="padding:0">Nakahi</span> <span style="color:var(--fg-muted)">×1</span></div>
+<div class="meta">Città · Capitale di Ras Alhague, città degli avventurieri</div></a>
+<a class="related-card" href="city-mnemia.html">
+<div class="name"><span class="el el-city" style="padding:0">Mnemia</span> <span style="color:var(--fg-muted)">×1</span></div>
+<div class="meta">Città · Città di Aldebaran, della memoria</div></a></div></div><div class="section"><h2>Citato da (4)</h2><div class="related-grid"><a class="related-card" href="city-lingra.html">
+<div class="name"><span class="el el-city" style="padding:0">Lingra</span> <span style="color:var(--fg-muted)">×7</span></div>
+<div class="meta">Città · Città di Deneb Algedi, capitale dell&#x27;Impero</div></a>
+<a class="related-card" href="city-kyklora.html">
+<div class="name"><span class="el el-city" style="padding:0">Kyklora</span> <span style="color:var(--fg-muted)">×2</span></div>
+<div class="meta">Città · Città di Antares, della natura</div></a>
+<a class="related-card" href="city-mizu.html">
+<div class="name"><span class="el el-city" style="padding:0">Mizu</span> <span style="color:var(--fg-muted)">×1</span></div>
+<div class="meta">Città · Città dell&#x27;Alrisha, dell&#x27;acqua e dei legami</div></a>
+<a class="related-card" href="astro-regolo.html">
+<div class="name"><span class="el el-astro" style="padding:0">Regolo</span> <span style="color:var(--fg-muted)">×1</span></div>
+<div class="meta">Astro · Astro della guerra e della gloria di Xiphos</div></a></div></div><div class="see-also"><h2>✨ Guarda anche</h2><p class="lead">Connessioni laterali: stesso tipo, mood o tema condiviso, o legati indirettamente attraverso altre entità.</p><div class="related-grid"><a class="related-card" href="city-paistos.html">
+<div class="name"><span class="el el-city" style="padding:0">Paistos</span></div>
+<div class="meta">Città · Città di Al Tarf, dell&#x27;emomanzia</div></a>
+<a class="related-card" href="city-velos.html">
+<div class="name"><span class="el el-city" style="padding:0">Velos</span></div>
+<div class="meta">Città · Città di Kaus, della felicità e dei draghi</div></a>
+<a class="related-card" href="city-zaer-vassel.html">
+<div class="name"><span class="el el-city" style="padding:0">Zaer&#x27;Vassel</span></div>
+<div class="meta">Città · Città di Sadalsuud, della magia</div></a>
+<a class="related-card" href="org-i-custodi-dell-indice.html">
+<div class="name"><span class="el el-org" style="padding:0">I Custodi dell&#x27;Indice</span></div>
+<div class="meta">Organizzazione · Gilda spirituale-amministrativa di Nakahi, evoluzione dell&#x27;Ordine del Biacco</div></a>
+<a class="related-card" href="discord-la-kaigetsu-1427370631250575541.html">
+<div class="name"><span class="el el-org" style="padding:0">La KaiGetsu</span></div>
+<div class="meta">Organizzazione · Associazione criminale mizuana, alleata Gorudo</div></a>
+<a class="related-card" href="discord-il-bastione-dei-dannati-1353809006065352796.html">
+<div class="name"><span class="el el-place" style="padding:0">Il Bastione dei Dannati</span></div>
+<div class="meta">Luogo · Antico Palazzo Caeloria, sede della casata Caellian</div></a></div></div></div></body></html>

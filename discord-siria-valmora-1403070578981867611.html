@@ -1,0 +1,73 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Siria Valmora — Westmarch Wiki</title><style>
+:root{--bg:#1e1f22;--bg-2:#2b2d31;--bg-3:#313338;--fg:#dbdee1;--fg-muted:#949ba4;--accent:#5865f2;--border:#1f2023;--link:#00a8fc;
+--c-city:#3aa1ff;--c-place:#5cb8ff;--c-person:#ff8b3a;--c-org:#a972ff;--c-event:#23a55a;--c-concept:#80848e;--c-astro:#fbbf24;--c-sage:#dc2626;--c-world:#10b981}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font-family:'gg sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;font-size:15px;line-height:1.55}
+a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
+.wrap{max-width:1100px;margin:0 auto;padding:24px 28px 80px}
+.entity-head{margin-bottom:16px}.entity-head h1{margin:0 0 4px;font-size:26px}
+.entity-head .type-badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;margin-bottom:8px}
+.entity-head .desc{color:var(--fg-muted);font-style:italic;font-size:14px;margin:6px 0}
+.btn{background:var(--bg-3);padding:6px 12px;border-radius:6px;font-size:13px;display:inline-block;margin-right:6px}
+.section{background:var(--bg-2);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-bottom:16px}
+.section h2{margin:0 0 12px;font-size:17px;border-bottom:1px solid var(--border);padding-bottom:8px}
+.body-text p{margin:0 0 10px}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.related-card{background:var(--bg-3);border:1px solid var(--border);border-radius:6px;padding:10px 12px;font-size:13px;display:block;color:var(--fg)}
+.related-card:hover{border-color:var(--accent);text-decoration:none}
+.related-card .name{font-weight:600}.related-card .meta{font-size:11px;color:var(--fg-muted);margin-top:2px}
+.see-also{background:linear-gradient(135deg,#1f1d2e 0%,#2b2d31 100%);border:1px dashed var(--border);border-radius:10px;padding:18px 22px;margin-bottom:16px;margin-top:24px}
+.see-also h2{margin:0 0 4px;font-size:17px;border:0;padding-bottom:0;color:var(--fg)}
+.see-also .lead{color:var(--fg-muted);font-size:12px;margin:0 0 12px;font-style:italic}
+.see-also .related-grid{grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px}
+.see-also .related-card{background:rgba(0,0,0,.25)}
+.see-also .related-card:hover{border-color:#fbbf24}
+.el{padding:1px 2px;border-radius:3px;font-weight:500}
+.el-city{color:#3aa1ff;background:rgba(58,161,255,.08)}.el-place{color:#5cb8ff;background:rgba(92,184,255,.08)}
+.el-person{color:#ff8b3a;background:rgba(255,139,58,.1)}.el-org{color:#a972ff;background:rgba(169,114,255,.1)}
+.el-event{color:#23a55a;background:rgba(35,165,90,.1)}.el-concept{color:#a3a8ad;background:rgba(128,132,142,.12)}
+.el-astro{color:#fbbf24;background:rgba(251,191,36,.1)}.el-sage{color:#dc2626;background:rgba(220,38,38,.1)}
+.el-world{color:#10b981;background:rgba(16,185,129,.1)}
+.el:hover{filter:brightness(1.3);text-decoration:underline}
+.discord-msg{display:flex;gap:12px;padding:8px 0;border-top:1px solid var(--border)}
+.discord-msg:first-child{border-top:0}
+.discord-msg .avatar{width:34px;height:34px;border-radius:50%;flex-shrink:0;background:var(--bg-3)}
+.discord-msg .body{flex:1;min-width:0}.discord-msg .head{font-size:12px;color:var(--fg-muted);margin-bottom:4px}
+.discord-msg .head .name{color:#fff;font-weight:600;margin-right:8px}
+.attachments{margin-top:8px;display:flex;flex-direction:column;gap:8px}
+.att-img{max-width:380px;max-height:280px;border-radius:6px;display:block;border:1px solid var(--border)}
+.att-file{display:inline-block;background:var(--bg-3);padding:6px 10px;border-radius:6px;border:1px solid var(--border);font-size:12px}
+.menubar{position:sticky;top:0;background:var(--bg-2);border-bottom:1px solid var(--border);padding:10px 28px;display:flex;gap:12px;font-size:13px;z-index:10;flex-wrap:wrap;align-items:center}
+.menubar .home{font-weight:700;margin-right:8px}.menubar a{color:var(--fg-muted)}
+@media(max-width:700px){.wrap{padding:14px 16px 60px}.menubar{padding:10px 16px}}
+</style></head><body><div class="menubar">
+<a class="home" href="index.html">🌍 Westmarch Wiki</a>
+<a href="index.html#cities">Città</a><a href="index.html#astri">Astri</a>
+<a href="index.html#sages">Saggi</a><a href="index.html#orgs">Organizzazioni</a>
+<a href="index.html#places">Luoghi</a><a href="index.html#persons">Persone</a>
+<a href="mappa_concettuale.html">Mappa</a>
+</div><div class="wrap"><div class="entity-head"><span class="type-badge" style="background:#ff8b3a33;color:#ff8b3a">Persona</span><h1>Siria Valmora</h1><p class="desc">Ombra dell&#x27;Ordine del Ferro e del Sangue</p><div style="margin-top:8px"><a class="btn" href="https://discord.com/channels/1083766723364270233/1403070578981867611" target="_blank" rel="noopener">💬 Discord</a></div></div><div class="section"><h2>Conversazione Discord (2 messaggi)</h2><div class="discord-msg"><img class="avatar" src="https://cdn.discordapp.com/avatars/323134348666863616/1de21f91a22a8015b6d1f918f8ab7b96.png?size=48" alt=""><div class="body"><div class="head"><span class="name">Dm_Marco</span><span>07 Aug 2025 · 17:41</span></div><div>Siria Valmora è l’ombra che aleggia tra le mura dell’<a class="el el-org" href="org-l-ordine-del-ferro-e-del-sangue.html" title="Gilda di avventurieri fondata da Ligirone, motto FERRUM ET SANGUIS">Ordine del Ferro e del Sangue</a>, un nome sussurrato con lo stesso timore reverenziale riservato alle lame più affilate. Cresciuta nelle pieghe più oscure di <a class="el el-city" href="city-nakahi.html" title="Capitale di Ras Alhague, città degli avventurieri">Nakahi</a>, fu temprata da violenze di strada e affari sporchi prima di indossare per la prima volta il mantello cremisi delle Lame di Sangue. Da allora la sua ascesa è stata rapida e brutale: alta poco più di un metro e settantacinque, corporatura asciutta, ma muscolosa e particolarmente agile e potente, occhi grigio-ferro che non tradiscono emozioni e un corpo ricoperto quasi completamente da profonde cicatrici, simbolo e testimonianza delle innumerevoli battaglie affrontate. Siria incarna il motto dell’Ordine — ferrum et sanguis — con una freddezza quasi inumana. A differenza della maggior parte dei confratelli, che prediligono martelli e spadoni, ha scelto la via del piombo: un paio di pistole pesanti a pietra focaia modificate con ingranaggi tecnomagici, tenute in fondine sotto un lungo cappotto di cuoio nerastro. Il boato secco dei suoi colpi è diventato il macabro sigillo di contratti troppo scomodi per altri.<br>Durante gli anni da operativa, Siria ha dimostrato un pragmatismo spietato: mai una parola di troppo, mai lasciare testimoni, mai fallire — e poco importava se il bersaglio fosse un nobile corrotto o un innocente ritenuto “sacrificabile” alla causa. Per qualcuno è un’assassina a sangue freddo, per altri un male necessario; per i più superstiziosi, addirittura un’arma senz’anima forgiata dall’Ordine stesso. Ciò che è certo è che, dopo aver ricevuto l’investitura a Cavaliere, ha smesso di apparire sul campo: ora governa un ufficio semi-segreto nelle cripte dell’avamposto principale, dove redige e assegna gli incarichi più controversi — quelli che richiedono mani pulite in pubblico e sporche nell’ombra. Solo in pochi riescono ad ottenere un udienza; e chi ci riesce, ne esce con una borsa di monete, un bersaglio e la certezza di non poter parlare mai più dell’accordo.</div><div class="attachments"><a href="https://cdn.discordapp.com/attachments/1403070578981867611/1403070579887833240/Siria_Valmora.png?ex=69ff71ce&is=69fe204e&hm=5a11144cd59a133f30dcded394a7ca5e9cd097777997d6ad4e0fe2e40903c95e&" target="_blank" rel="noopener"><img class="att-img" src="https://cdn.discordapp.com/attachments/1403070578981867611/1403070579887833240/Siria_Valmora.png?ex=69ff71ce&is=69fe204e&hm=5a11144cd59a133f30dcded394a7ca5e9cd097777997d6ad4e0fe2e40903c95e&" alt="Siria_Valmora.png" loading="lazy"></a><a href="https://cdn.discordapp.com/attachments/1403070578981867611/1403070580705464480/Esterno_della_Grande_Sala_dellOrdine_del_Ferro_e_del_Sangue.png?ex=69ff71ce&is=69fe204e&hm=4bb1a9cda593abb6203e0a9f3591d59f38a3f10b62ade48c7fa5ef5f1faceff2&" target="_blank" rel="noopener"><img class="att-img" src="https://cdn.discordapp.com/attachments/1403070578981867611/1403070580705464480/Esterno_della_Grande_Sala_dellOrdine_del_Ferro_e_del_Sangue.png?ex=69ff71ce&is=69fe204e&hm=4bb1a9cda593abb6203e0a9f3591d59f38a3f10b62ade48c7fa5ef5f1faceff2&" alt="Esterno_della_Grande_Sala_dellOrdine_del_Ferro_e_del_Sangue.png" loading="lazy"></a></div></div></div><div class="discord-msg"><img class="avatar" src="https://cdn.discordapp.com/avatars/323134348666863616/1de21f91a22a8015b6d1f918f8ab7b96.png?size=48" alt=""><div class="body"><div class="head"><span class="name">Dm_Marco</span><span>01 Sep 2025 · 15:40</span></div><div>**Vinicio Marvelli**<br>Sulla trentina, Vinicio è un uomo di bell’aspetto temprato dalle strade di <a class="el el-city" href="city-nakahi.html" title="Capitale di Ras Alhague, città degli avventurieri">Nakahi</a> e dall’addestramento spietato dell’<a class="el el-org" href="org-l-ordine-del-ferro-e-del-sangue.html" title="Gilda di avventurieri fondata da Ligirone, motto FERRUM ET SANGUIS">Ordine del Ferro e del Sangue</a>. I capelli castani, non troppo lunghi e spesso spettinati, incorniciano un volto segnato da uno sguardo vigile e una barba incolta che gli dona un’aria ruvida e affascinante. Indossa una consunta armatura di cuoio, rinforzata da placche metalliche leggere, sopra cui porta un mantello scuro che lo aiuta a confondersi tra le <a class="el el-concept" href="concept-ombre.html" title="Creature di fumo nero nate dalle persone svuotate dai trasmogrificatori">ombre</a>. Agile e rapido nei movimenti, preferisce la precisione alla forza bruta, facendo di lui un combattente letale nelle imboscate e un fedele braccio destro nelle trame silenziose di Siria, infatti è proprio lui ad occuparsi di condurre i mercenari nei suoi uffici privati.</div><div class="attachments"><a href="https://cdn.discordapp.com/attachments/1403070578981867611/1412099793546776726/Vinicio.png?ex=69ff556a&is=69fe03ea&hm=c40661eedbcb91332d25cbb3c94b2b9c8545ba75a3f582290ae2bb85a1dcb8cd&" target="_blank" rel="noopener"><img class="att-img" src="https://cdn.discordapp.com/attachments/1403070578981867611/1412099793546776726/Vinicio.png?ex=69ff556a&is=69fe03ea&hm=c40661eedbcb91332d25cbb3c94b2b9c8545ba75a3f582290ae2bb85a1dcb8cd&" alt="Vinicio.png" loading="lazy"></a></div></div></div></div><div class="section"><h2>Cita (3)</h2><div class="related-grid"><a class="related-card" href="org-l-ordine-del-ferro-e-del-sangue.html">
+<div class="name"><span class="el el-org" style="padding:0">L&#x27;Ordine del Ferro e del Sangue</span> <span style="color:var(--fg-muted)">×2</span></div>
+<div class="meta">Organizzazione · Gilda di avventurieri fondata da Ligirone, motto FERRUM ET SANGUIS</div></a>
+<a class="related-card" href="city-nakahi.html">
+<div class="name"><span class="el el-city" style="padding:0">Nakahi</span> <span style="color:var(--fg-muted)">×2</span></div>
+<div class="meta">Città · Capitale di Ras Alhague, città degli avventurieri</div></a>
+<a class="related-card" href="concept-ombre.html">
+<div class="name"><span class="el el-concept" style="padding:0">Le Ombre</span> <span style="color:var(--fg-muted)">×1</span></div>
+<div class="meta">Concetto · Creature di fumo nero nate dalle persone svuotate dai trasmogrificatori</div></a></div></div><div class="see-also"><h2>✨ Guarda anche</h2><p class="lead">Connessioni laterali: stesso tipo, mood o tema condiviso, o legati indirettamente attraverso altre entità.</p><div class="related-grid"><a class="related-card" href="discord-il-bastione-dei-dannati-1353809006065352796.html">
+<div class="name"><span class="el el-place" style="padding:0">Il Bastione dei Dannati</span></div>
+<div class="meta">Luogo · Antico Palazzo Caeloria, sede della casata Caellian</div></a>
+<a class="related-card" href="org-i-custodi-dell-indice.html">
+<div class="name"><span class="el el-org" style="padding:0">I Custodi dell&#x27;Indice</span></div>
+<div class="meta">Organizzazione · Gilda spirituale-amministrativa di Nakahi, evoluzione dell&#x27;Ordine del Biacco</div></a>
+<a class="related-card" href="discord-la-profezia-1341932282298237020.html">
+<div class="name"><span class="el el-event" style="padding:0">La Profezia</span></div>
+<div class="meta">Evento/Lore · Profezia che parla della caduta delle mura di Nakahi e dei cinque prescelti</div></a>
+<a class="related-card" href="org-il-caravanserraglio.html">
+<div class="name"><span class="el el-org" style="padding:0">Il Caravanserraglio</span></div>
+<div class="meta">Organizzazione · Corporazione mercanti + gilda avventurieri di Nakahi (Triumviri Farnel/Udimon Kadris e Madriga Lodo-</div></a>
+<a class="related-card" href="discord-mercurio-vellone-1343715448268787763.html">
+<div class="name"><span class="el el-person" style="padding:0">Mercurio Vellone</span></div>
+<div class="meta">Persona · Faccendiere del Caravanserraglio (recente)</div></a>
+<a class="related-card" href="discord-la-kaigetsu-1427370631250575541.html">
+<div class="name"><span class="el el-org" style="padding:0">La KaiGetsu</span></div>
+<div class="meta">Organizzazione · Associazione criminale mizuana, alleata Gorudo</div></a></div></div></div></body></html>

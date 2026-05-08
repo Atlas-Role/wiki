@@ -1,0 +1,84 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ahi Koati — Westmarch Wiki</title><style>
+:root{--bg:#1e1f22;--bg-2:#2b2d31;--bg-3:#313338;--fg:#dbdee1;--fg-muted:#949ba4;--accent:#5865f2;--border:#1f2023;--link:#00a8fc;
+--c-city:#3aa1ff;--c-place:#5cb8ff;--c-person:#ff8b3a;--c-org:#a972ff;--c-event:#23a55a;--c-concept:#80848e;--c-astro:#fbbf24;--c-sage:#dc2626;--c-world:#10b981}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font-family:'gg sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;font-size:15px;line-height:1.55}
+a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
+.wrap{max-width:1100px;margin:0 auto;padding:24px 28px 80px}
+.entity-head{margin-bottom:16px}.entity-head h1{margin:0 0 4px;font-size:26px}
+.entity-head .type-badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;margin-bottom:8px}
+.entity-head .desc{color:var(--fg-muted);font-style:italic;font-size:14px;margin:6px 0}
+.btn{background:var(--bg-3);padding:6px 12px;border-radius:6px;font-size:13px;display:inline-block;margin-right:6px}
+.section{background:var(--bg-2);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-bottom:16px}
+.section h2{margin:0 0 12px;font-size:17px;border-bottom:1px solid var(--border);padding-bottom:8px}
+.body-text p{margin:0 0 10px}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.related-card{background:var(--bg-3);border:1px solid var(--border);border-radius:6px;padding:10px 12px;font-size:13px;display:block;color:var(--fg)}
+.related-card:hover{border-color:var(--accent);text-decoration:none}
+.related-card .name{font-weight:600}.related-card .meta{font-size:11px;color:var(--fg-muted);margin-top:2px}
+.see-also{background:linear-gradient(135deg,#1f1d2e 0%,#2b2d31 100%);border:1px dashed var(--border);border-radius:10px;padding:18px 22px;margin-bottom:16px;margin-top:24px}
+.see-also h2{margin:0 0 4px;font-size:17px;border:0;padding-bottom:0;color:var(--fg)}
+.see-also .lead{color:var(--fg-muted);font-size:12px;margin:0 0 12px;font-style:italic}
+.see-also .related-grid{grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px}
+.see-also .related-card{background:rgba(0,0,0,.25)}
+.see-also .related-card:hover{border-color:#fbbf24}
+.el{padding:1px 2px;border-radius:3px;font-weight:500}
+.el-city{color:#3aa1ff;background:rgba(58,161,255,.08)}.el-place{color:#5cb8ff;background:rgba(92,184,255,.08)}
+.el-person{color:#ff8b3a;background:rgba(255,139,58,.1)}.el-org{color:#a972ff;background:rgba(169,114,255,.1)}
+.el-event{color:#23a55a;background:rgba(35,165,90,.1)}.el-concept{color:#a3a8ad;background:rgba(128,132,142,.12)}
+.el-astro{color:#fbbf24;background:rgba(251,191,36,.1)}.el-sage{color:#dc2626;background:rgba(220,38,38,.1)}
+.el-world{color:#10b981;background:rgba(16,185,129,.1)}
+.el:hover{filter:brightness(1.3);text-decoration:underline}
+.discord-msg{display:flex;gap:12px;padding:8px 0;border-top:1px solid var(--border)}
+.discord-msg:first-child{border-top:0}
+.discord-msg .avatar{width:34px;height:34px;border-radius:50%;flex-shrink:0;background:var(--bg-3)}
+.discord-msg .body{flex:1;min-width:0}.discord-msg .head{font-size:12px;color:var(--fg-muted);margin-bottom:4px}
+.discord-msg .head .name{color:#fff;font-weight:600;margin-right:8px}
+.attachments{margin-top:8px;display:flex;flex-direction:column;gap:8px}
+.att-img{max-width:380px;max-height:280px;border-radius:6px;display:block;border:1px solid var(--border)}
+.att-file{display:inline-block;background:var(--bg-3);padding:6px 10px;border-radius:6px;border:1px solid var(--border);font-size:12px}
+.menubar{position:sticky;top:0;background:var(--bg-2);border-bottom:1px solid var(--border);padding:10px 28px;display:flex;gap:12px;font-size:13px;z-index:10;flex-wrap:wrap;align-items:center}
+.menubar .home{font-weight:700;margin-right:8px}.menubar a{color:var(--fg-muted)}
+@media(max-width:700px){.wrap{padding:14px 16px 60px}.menubar{padding:10px 16px}}
+</style></head><body><div class="menubar">
+<a class="home" href="index.html">🌍 Westmarch Wiki</a>
+<a href="index.html#cities">Città</a><a href="index.html#astri">Astri</a>
+<a href="index.html#sages">Saggi</a><a href="index.html#orgs">Organizzazioni</a>
+<a href="index.html#places">Luoghi</a><a href="index.html#persons">Persone</a>
+<a href="mappa_concettuale.html">Mappa</a>
+</div><div class="wrap"><div class="entity-head"><span class="type-badge" style="background:#3aa1ff33;color:#3aa1ff">Città</span><h1>Ahi Koati</h1><p class="desc">Città di Hamal, del fuoco e della forza</p><div style="margin-top:8px"><a class="btn" href="https://docs.google.com/document/d/1WueONn1eYslsYljueYVRDuQGD6HnRxet5b347xROt04/edit" target="_blank" rel="noopener">📄 Drive</a></div></div><div class="section"><h2>Descrizione</h2><div class="body-text"><p>Ahi Koati - la città del fuoco e della forza<br>La città di Ahi koati sorge in una cornice naturale tanto particolare quanto ostile.<br>Il nucleo abitativo principale si erge sulle pendici di un vulcano attivo mentre, tutto attorno alle pendici del monte, cresce rigogliosa una folta foresta di dominio delle fate.<br>L’<a class="el el-astro" href="astro-hamal.html" title="Astro del fuoco e della forza di Ahi Koati">Hamal</a>, astro locale, ha come domini il fuoco e la forza; intesa come capacità del singolo di sopravvivere e proteggere. Proprio per questo l’Hamal è l’unico Astro di <a class="el el-world" href="concept-vastria.html" title="Continente intero su cui si svolge il Westmarch">Vastria</a> a consentire l’ascensione per combattimento all’ultimo sangue.<br>La città ha un nucleo urbano principale che si sviluppa attorno al tempio dell’astro direttamente sulle pendici del vulcano “Tama Afi” ed è protetta dalla magia dell’astro contro le colate di roccia fusa che periodicamente emergono dalla sommità o dai fianchi della montagna. Il resto della popolazione vive in piccoli agglomerati urbani o direttamente isolata nella foresta.<br>La civiltà di Ahi koati è cresciuta seguendo le leggi della natura, in particolare quella del ciclo della vita che considera il rapporto preda-predatore come alla base dei rapporti sociali; non è che i deboli vengano schiacciati ma, se non possiedi nessun punto di forza che ti possa permettere di sopravvivere difficilmente qualcuno provvederà per te.<br>Tutti i cittadini di Ahi koati rispettano la natura ma se ne considerano parte, non trovando quindi sbagliato ricavarsi i propri spazi anche abbattendo alberi o livellando colline, tuttavia proprio in virtù di questo rispetto lasciano immutato qualunque punto della foresta non sia strettamente necessario urbanizzare.<br>La magia dell’ Hamal ha creato i Muak, naturalmente forti e robusti, dalla pelle che varia tra il verde ed il nero ed un folto crine di capelli tra il nero ed il rosso acceso. I tratti facciali dei Muak sono piuttosto rudi e pronunciati (con rare eccezioni) arrivando addirittura a trasformare i denti in piccole zanne nei casi più evidenti, questo per manifestare la loro vicinanza alla natura ed al regno animale in particolare.<br>La peculiare colorazione della loro pelle e dei loro capelli invece esprime la loro innata propensione per l’elemento del fuoco; quasi ognuno di loro è in grado di richiamare fiamme magiche in maniera istintiva anche se, si dice, che più è scura la pelle e più sono rossi i capelli di un Muak, più grande sarà la sua maestria nel dominare le fiamme.<br>Ad Ahi Koati i Muak convivono con le fate. Come succede anche nell’esotica <a class="el el-city" href="city-kyklora.html" title="Città di Antares, della natura">Kyklora</a> la vicinanza alla natura dei Muak ha portato le fate a trovare la loro foresta appetibile per la vita. Le fate locali tuttavia sono prevalentemente figlie della notte e delle corti oscure, rendendole ingannevoli e violente per natura; non è raro che un Muak od una fata che sconfinano nel territorio dei propri vicini causi scompiglio se non addirittura dei conflitti interni alla città. Nonostante i litigi, tuttavia, le due razze convivono abbastanza tranquillamente, con i leader dei due popoli che provvedono a sedare i conflitti più importanti poichè tra le due culture c’è un rapporto di rispetto e codipendenza. Se è infatti vero che le fate rendono la foresta più ricca di risorse anche per i Muak e li aiutano a trovare sostentamento o riparo dalla furia del vulcano; è vero anche che questi ultimi custodiscono ferocemente i confini dei loro territori rendendo un’ eventuale tentativo di conquista decisamente complesso e regolano il passaggio ed il comportamento degli stranieri.Dopo dei recenti avvenimenti che hanno visto Ahi Koati protagonista di una sommossa popolare e della detronizzazione dell’ennesimo Hamal per duello cerimoniale, il Toa, un nuovo ideale ha cominciato a serpeggiare fra le menti di molti Muak: trasformare Ahi Koati in una potenza militare e conquistatrice.SCHEDA CARATTERISTICHE:Bioma e Geografia: Ahi Koati è una grande isola, verdeggiante e tropicale, al centro della quale troneggia l’imponente vulcano Tama Afi. Qualche altra montagna e collina costella il territorio dell’isola, ma impallidisce davanti al vulcano centrale.Architettura: Ispirazione Sud-Americana nativa, Inca, MayaGoverno: Ahi Koati presenta una scena politica abbastanza ramificata e frammentata. Partendo dal pensiero che il Regno di Ahi Koati è una Teocrazia Assoluta basata sull’Hamal, la suddivisione sociale sottostante è la seguente: I Muak sono organizzati in clan, enormi famiglie allargate, che possiedono un capoclan, che a sua volta si rifà al Paia Nui, il grande capo della società Muak che fa da anello di congiunzione (E sacerdote) tra il popolo e l’Astro. Il Paia Nui viene eletto fra tutti i capoclan quando il precedente muore. E’ possibile tuttavia sfidare il Paia Nui attuale a una Toa e reclamare la sua posizione.Dall’altra parte della società di Ahi Koati, si trovano le fate, che vivono separatamente dai Muak. Queste sono organizzate in due corti, La Corte del Giorno e la Corte della Notte. Ogni corte è guidata da un Re o una Regina, sotto ai quali stanno i nobili e sotto ancora i cittadini comuni. Le due Corti sono litigiose fra di loro, ma sulla teoria dovrebbero essere i due lati della stessa medaglia, coesistenti, e quindi nonostante i litigi rimangono formalmente alleate e collaboranti. Questo grande e ramificato organismo, tuttavia, si rifà sempre e comunque all’Hamal, senza nessuna eccezione di razza o lignaggio.Organi Armati: Ogni cittadino di Ahi Koati, sia esso Muak o Fata, ha una educazione combattiva, che varia in profondità in base all’individuo. All’atto pratico, non esistono eserciti, dipartimenti, organizzazioni precise a scopo militare, ma se necessario, l’intero popolo dell’isola sarebbe in grado di prendere le armi e diventare un vero e proprio esercito… o un orda.Religione: Unica e assoluta, L’Hamal è non solo l’unica figura venerata ad Ahi Koati, ma anche l’individuo più forte sull’isola.Mentalità: Estremamente meritocratica, la società di Ahi Koati è basata sulla forza e la risolutezza. Anche le Fate, che sono abituate a inganni e intrighi, si profondono nei suddetti quasi per diletto, rimanendo, per quanto riguarda le faccende serie, allineate con la mentalità comune e il culto del valore.Economia: Autosufficiente, Ahi Koati non si concentra come comunità sul commercio, in quanto non necessario alla sopravvivenza in senso stretto. I cittadini dell’isola utilizzano le monete e scambiano fra di loro e con gli stranieri, ma non hanno un’approfondita cultura del commercio, al punto da apprezzare ancora il concetto di baratto. Popolazione e Territorio: Numerosa, i Muak sono più concentrati ad Ahi Koati (Capitale) e in alcuni altri insediamenti sparsi sull’isola, mentre le Fate risiedono nelle foreste e nelle zone più “selvagge”, rimanendo ben distaccate territorialmente dai loro compaesani dai capelli rossi.Lingua di Ispirazione: Samoano</p></div></div><div class="section"><h2>Cita (3)</h2><div class="related-grid"><a class="related-card" href="astro-hamal.html">
+<div class="name"><span class="el el-astro" style="padding:0">Hamal</span> <span style="color:var(--fg-muted)">×7</span></div>
+<div class="meta">Astro · Astro del fuoco e della forza di Ahi Koati</div></a>
+<a class="related-card" href="city-kyklora.html">
+<div class="name"><span class="el el-city" style="padding:0">Kyklora</span> <span style="color:var(--fg-muted)">×1</span></div>
+<div class="meta">Città · Città di Antares, della natura</div></a>
+<a class="related-card" href="concept-vastria.html">
+<div class="name"><span class="el el-world" style="padding:0">Vastria</span> <span style="color:var(--fg-muted)">×1</span></div>
+<div class="meta">Mondo · Continente intero su cui si svolge il Westmarch</div></a></div></div><div class="section"><h2>Citato da (4)</h2><div class="related-grid"><a class="related-card" href="city-xiphos.html">
+<div class="name"><span class="el el-city" style="padding:0">Xiphos</span> <span style="color:var(--fg-muted)">×1</span></div>
+<div class="meta">Città · Città di Regolo, della guerra e della gloria</div></a>
+<a class="related-card" href="astro-hamal.html">
+<div class="name"><span class="el el-astro" style="padding:0">Hamal</span> <span style="color:var(--fg-muted)">×1</span></div>
+<div class="meta">Astro · Astro del fuoco e della forza di Ahi Koati</div></a>
+<a class="related-card" href="sage-kirikourah.html">
+<div class="name"><span class="el el-sage" style="padding:0">Kirikourah</span> <span style="color:var(--fg-muted)">×1</span></div>
+<div class="meta">Saggio del Cielo Notturno · Saggio di Ahi Koati, Falso Astro del Rimorso, Il Padre dell&#x27;Oro (in sonno sotto il Tama Afi)</div></a>
+<a class="related-card" href="discord-il-principe-delle-fate-1341105523248070756.html">
+<div class="name"><span class="el el-org" style="padding:0">Il Principe delle Fate</span> <span style="color:var(--fg-muted)">×1</span></div>
+<div class="meta">Organizzazione · Banda di ladri gentiluomini, hanno rapinato la casa d&#x27;aste del Caravanserraglio</div></a></div></div><div class="see-also"><h2>✨ Guarda anche</h2><p class="lead">Connessioni laterali: stesso tipo, mood o tema condiviso, o legati indirettamente attraverso altre entità.</p><div class="related-grid"><a class="related-card" href="city-nakahi.html">
+<div class="name"><span class="el el-city" style="padding:0">Nakahi</span></div>
+<div class="meta">Città · Capitale di Ras Alhague, città degli avventurieri</div></a>
+<a class="related-card" href="city-atua-rua.html">
+<div class="name"><span class="el el-city" style="padding:0">Atua Rua</span></div>
+<div class="meta">Città · Città di Castore e Polluce, dell&#x27;anima duplice</div></a>
+<a class="related-card" href="city-lingra.html">
+<div class="name"><span class="el el-city" style="padding:0">Lingra</span></div>
+<div class="meta">Città · Città di Deneb Algedi, capitale dell&#x27;Impero</div></a>
+<a class="related-card" href="city-zaer-vassel.html">
+<div class="name"><span class="el el-city" style="padding:0">Zaer&#x27;Vassel</span></div>
+<div class="meta">Città · Città di Sadalsuud, della magia</div></a>
+<a class="related-card" href="city-mnemia.html">
+<div class="name"><span class="el el-city" style="padding:0">Mnemia</span></div>
+<div class="meta">Città · Città di Aldebaran, della memoria</div></a>
+<a class="related-card" href="city-mizu.html">
+<div class="name"><span class="el el-city" style="padding:0">Mizu</span></div>
+<div class="meta">Città · Città dell&#x27;Alrisha, dell&#x27;acqua e dei legami</div></a></div></div></div></body></html>

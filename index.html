@@ -1,0 +1,197 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Westmarch Wiki</title><style>
+:root{--bg:#1e1f22;--bg-2:#2b2d31;--bg-3:#313338;--fg:#dbdee1;--fg-muted:#949ba4;--accent:#5865f2;--border:#1f2023;--link:#00a8fc;
+--c-city:#3aa1ff;--c-place:#5cb8ff;--c-person:#ff8b3a;--c-org:#a972ff;--c-event:#23a55a;--c-concept:#80848e;--c-astro:#fbbf24;--c-sage:#dc2626;--c-world:#10b981}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font-family:'gg sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;font-size:15px;line-height:1.55}
+a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
+.wrap{max-width:1100px;margin:0 auto;padding:24px 28px 80px}
+.topbar{display:flex;align-items:center;gap:14px;border-bottom:1px solid var(--border);padding-bottom:14px;margin-bottom:24px;flex-wrap:wrap}
+.topbar h1{margin:0;font-size:20px;flex:1 1 auto}.topbar .crumbs{color:var(--fg-muted);font-size:12px}
+.topbar a.btn{background:var(--bg-3);padding:6px 12px;border-radius:6px;font-size:13px}
+.entity-head{margin-bottom:16px}.entity-head h1{margin:0 0 4px;font-size:26px}
+.entity-head .type-badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;margin-bottom:8px}
+.entity-head .desc{color:var(--fg-muted);font-style:italic;font-size:14px;margin:6px 0}
+.section{background:var(--bg-2);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-bottom:16px}
+.section h2{margin:0 0 12px;font-size:17px;border-bottom:1px solid var(--border);padding-bottom:8px}
+.body-text{white-space:pre-wrap;word-wrap:break-word}
+.body-text p{margin:0 0 10px}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.related-card{background:var(--bg-3);border:1px solid var(--border);border-radius:6px;padding:10px 12px;font-size:13px;display:block;color:var(--fg)}
+.related-card:hover{border-color:var(--accent);text-decoration:none}
+.related-card .name{font-weight:600}.related-card .meta{font-size:11px;color:var(--fg-muted);margin-top:2px}
+.el{padding:1px 2px;border-radius:3px;text-decoration:none;font-weight:500}
+.el-city{color:#3aa1ff;background:rgba(58,161,255,.08)}.el-place{color:#5cb8ff;background:rgba(92,184,255,.08)}
+.el-person{color:#ff8b3a;background:rgba(255,139,58,.1)}.el-org{color:#a972ff;background:rgba(169,114,255,.1)}
+.el-event{color:#23a55a;background:rgba(35,165,90,.1)}.el-concept{color:#a3a8ad;background:rgba(128,132,142,.12)}
+.el-astro{color:#fbbf24;background:rgba(251,191,36,.1)}.el-sage{color:#dc2626;background:rgba(220,38,38,.1)}
+.el-world{color:#10b981;background:rgba(16,185,129,.1)}
+.el:hover{filter:brightness(1.3);text-decoration:underline}
+.discord-msg{display:flex;gap:12px;padding:8px 0;border-top:1px solid var(--border)}
+.discord-msg:first-child{border-top:0}
+.discord-msg .avatar{width:34px;height:34px;border-radius:50%;flex-shrink:0;background:var(--bg-3)}
+.discord-msg .body{flex:1;min-width:0}
+.discord-msg .head{font-size:12px;color:var(--fg-muted);margin-bottom:4px}
+.discord-msg .head .name{color:#fff;font-weight:600;margin-right:8px}
+.discord-msg .content{word-wrap:break-word}
+.attachments{margin-top:8px;display:flex;flex-direction:column;gap:8px}
+.att-img{max-width:380px;max-height:280px;border-radius:6px;display:block;border:1px solid var(--border)}
+.att-file{display:inline-block;background:var(--bg-3);padding:6px 10px;border-radius:6px;border:1px solid var(--border);font-size:12px}
+.menubar{position:sticky;top:0;background:var(--bg-2);border-bottom:1px solid var(--border);padding:10px 28px;display:flex;gap:12px;font-size:13px;z-index:10;flex-wrap:wrap;align-items:center}
+.menubar .home{font-weight:700;margin-right:8px}.menubar a{color:var(--fg-muted)}.menubar a.active{color:var(--fg)}
+@media(max-width:700px){.wrap{padding:14px 16px 60px}.menubar{padding:10px 16px}}
+</style><style>
+.hero{background:linear-gradient(135deg,#1a1d2e,#2b2d31);border:1px solid var(--border);border-radius:14px;padding:24px 28px;margin-bottom:22px}
+.hero h1{margin:0 0 6px;font-size:28px;background:linear-gradient(90deg,#5865f2,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .tag{font-size:13px;color:var(--fg-muted);margin-bottom:14px}
+.hero p{margin:8px 0;color:var(--fg)}
+.stats{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.stat{background:var(--bg-3);padding:10px 14px;border-radius:8px;min-width:90px;flex:1}.stat b{display:block;font-size:18px}.stat span{color:var(--fg-muted);font-size:11px;text-transform:uppercase;letter-spacing:.6px}
+.search-box{margin:20px 0 14px}.search-box input{width:100%;background:var(--bg-3);border:1px solid var(--border);color:var(--fg);padding:11px 14px;border-radius:8px;font:inherit;font-size:15px}
+.search-box input:focus{outline:1px solid var(--accent)}
+.filter-chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.filter-chips button{background:var(--bg-3);color:var(--fg);border:1px solid var(--border);padding:6px 12px;border-radius:18px;cursor:pointer;font-size:12px}
+.filter-chips button.off{opacity:.32}
+.section-title{color:var(--fg-muted);font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;margin:26px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin-bottom:14px}
+.card{display:block;background:var(--bg-2);border:1px solid var(--border);border-radius:10px;padding:14px 16px;color:var(--fg);transition:transform .1s}
+.card:hover{transform:translateY(-1px);border-color:var(--accent);text-decoration:none}
+.card h3{margin:0 0 6px;font-size:14px;font-weight:600}.card .meta{font-size:11px;color:var(--fg-muted)}.card .snip{font-size:12px;color:var(--fg-muted);margin-top:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+</style></head><body><div class="menubar">
+<a class="home" href="index.html">🌍 Westmarch Wiki</a>
+<a href="index.html#cities">Città</a>
+<a href="index.html#astri">Astri</a>
+<a href="index.html#sages">Saggi</a>
+<a href="index.html#orgs">Organizzazioni</a>
+<a href="index.html#places">Luoghi</a>
+<a href="index.html#persons">Persone</a>
+<a href="index.html#events">Eventi/Lore</a>
+<a href="mappa_concettuale.html">Mappa Concettuale</a>
+</div><div class="wrap">
+<div class="hero"><h1>Westmarch Wiki</h1><div class="tag">Atlas Role · Vastria · Compendium navigabile di tutta l'ambientazione</div>
+<p>Wiki integrata di tutti i contenuti del Westmarch: città di Vastria, Astri e Saggi del Cielo Notturno, organizzazioni e gilde, luoghi, persone e thread del forum <span class="el el-place" style="padding:0">Nakahi Tour Guide</span> di Discord. Ogni pagina è collegata alle altre via hyperlink automatici sulle menzioni nel testo: clicca un termine evidenziato per saltare alla pagina relativa.</p>
+<div class="stats">
+<div class="stat"><b>91</b><span>entità totali</span></div>
+<div class="stat"><b>30</b><span>thread Discord</span></div>
+<div class="stat"><b>29</b><span>doc Drive</span></div>
+<div class="stat"><b>4</b><span>PDF (gilde)</span></div>
+<div class="stat"><b>267</b><span>connessioni</span></div>
+</div></div>
+<div class="search-box"><input id="search" type="search" placeholder="Cerca tra 91 entità (nome, tipo)…" autocomplete="off"></div>
+<div class="filter-chips" id="filters"></div>
+<h2 id="cities" class="section-title">Città (15)</h2><div class="grid"><a class="card" href="city-ahi-koati.html" data-name="ahi koati" data-type="city"><h3><span class="el el-city" style="padding:0">Ahi Koati</span></h3><div class="meta">Città · Drive</div><div class="snip">Città di Hamal, del fuoco e della forza</div></a>
+<a class="card" href="city-atua-rua.html" data-name="atua rua" data-type="city"><h3><span class="el el-city" style="padding:0">Atua Rua</span></h3><div class="meta">Città · Drive</div><div class="snip">Città di Castore e Polluce, dell&#x27;anima duplice</div></a>
+<a class="card" href="city-damya.html" data-name="damya" data-type="city"><h3><span class="el el-city" style="padding:0">Damya</span></h3><div class="meta">Città · Drive</div><div class="snip">Città di Spica, del commercio e dell&#x27;intrigo</div></a>
+<a class="card" href="city-eutomia.html" data-name="eutomia" data-type="city"><h3><span class="el el-city" style="padding:0">Eutomia</span></h3><div class="meta">Città · Drive</div><div class="snip">Città di Lanx, della legge e del fulmine</div></a>
+<a class="card" href="city-kyklora.html" data-name="kyklora" data-type="city"><h3><span class="el el-city" style="padding:0">Kyklora</span></h3><div class="meta">Città · Drive</div><div class="snip">Città di Antares, della natura</div></a>
+<a class="card" href="city-lingra.html" data-name="lingra" data-type="city"><h3><span class="el el-city" style="padding:0">Lingra</span></h3><div class="meta">Città · Drive</div><div class="snip">Città di Deneb Algedi, capitale dell&#x27;Impero</div></a>
+<a class="card" href="city-mizu.html" data-name="mizu" data-type="city"><h3><span class="el el-city" style="padding:0">Mizu</span></h3><div class="meta">Città · Drive</div><div class="snip">Città dell&#x27;Alrisha, dell&#x27;acqua e dei legami</div></a>
+<a class="card" href="city-mizurin.html" data-name="mizurin" data-type="city"><h3><span class="el el-city" style="padding:0">Mizurin</span></h3><div class="meta">Città · Drive</div><div class="snip">Città fluviale fondata da esuli di Mizu</div></a>
+<a class="card" href="city-mnemia.html" data-name="mnemia" data-type="city"><h3><span class="el el-city" style="padding:0">Mnemia</span></h3><div class="meta">Città · Drive</div><div class="snip">Città di Aldebaran, della memoria</div></a>
+<a class="card" href="city-nakahi.html" data-name="nakahi" data-type="city"><h3><span class="el el-city" style="padding:0">Nakahi</span></h3><div class="meta">Città · Drive</div><div class="snip">Capitale di Ras Alhague, città degli avventurieri</div></a>
+<a class="card" href="city-paistos.html" data-name="paistos" data-type="city"><h3><span class="el el-city" style="padding:0">Paistos</span></h3><div class="meta">Città · Drive</div><div class="snip">Città di Al Tarf, dell&#x27;emomanzia</div></a>
+<a class="card" href="city-turasar.html" data-name="turasar" data-type="city"><h3><span class="el el-city" style="padding:0">Turasar</span></h3><div class="meta">Città · Drive</div><div class="snip">Regno nanico di Tordek nelle Montagne di Vetro</div></a>
+<a class="card" href="city-velos.html" data-name="velos" data-type="city"><h3><span class="el el-city" style="padding:0">Velos</span></h3><div class="meta">Città · Drive</div><div class="snip">Città di Kaus, della felicità e dei draghi</div></a>
+<a class="card" href="city-xiphos.html" data-name="xiphos" data-type="city"><h3><span class="el el-city" style="padding:0">Xiphos</span></h3><div class="meta">Città · Drive</div><div class="snip">Città di Regolo, della guerra e della gloria</div></a>
+<a class="card" href="city-zaer-vassel.html" data-name="zaer&#x27;vassel" data-type="city"><h3><span class="el el-city" style="padding:0">Zaer&#x27;Vassel</span></h3><div class="meta">Città · Drive</div><div class="snip">Città di Sadalsuud, della magia</div></a></div><h2 id="astri" class="section-title">Astri (13)</h2><div class="grid"><a class="card" href="astro-al-tarf.html" data-name="al tarf" data-type="astro"><h3><span class="el el-astro" style="padding:0">Al Tarf</span></h3><div class="meta">Astro · Vademecum</div><div class="snip">Astro del sangue di Paistos</div></a>
+<a class="card" href="astro-aldebaran.html" data-name="aldebaran" data-type="astro"><h3><span class="el el-astro" style="padding:0">Aldebaran</span></h3><div class="meta">Astro · Vademecum</div><div class="snip">Astro della terra e della memoria di Mnemia (ex re Rokhar Thorà, fuso con Cerebrax)</div></a>
+<a class="card" href="astro-alrisha.html" data-name="alrisha" data-type="astro"><h3><span class="el el-astro" style="padding:0">Alrisha</span></h3><div class="meta">Astro · Vademecum</div><div class="snip">Astro dell&#x27;acqua e dei legami di Mizu</div></a>
+<a class="card" href="astro-antares.html" data-name="antares" data-type="astro"><h3><span class="el el-astro" style="padding:0">Antares</span></h3><div class="meta">Astro · Vademecum</div><div class="snip">Astro della natura di Kyklora (ex falso astro della corruzione blasfema)</div></a>
+<a class="card" href="astro-castore-e-polluce.html" data-name="castore e polluce" data-type="astro"><h3><span class="el el-astro" style="padding:0">Castore e Polluce</span></h3><div class="meta">Astro · Vademecum</div><div class="snip">Astro duplice di Atua Rua, dominio dell&#x27;anima</div></a>
+<a class="card" href="astro-deneb-algedi.html" data-name="deneb algedi" data-type="astro"><h3><span class="el el-astro" style="padding:0">Deneb Algedi</span></h3><div class="meta">Astro · Vademecum</div><div class="snip">Astro della guerra e dell&#x27;unità di Lingra</div></a>
+<a class="card" href="astro-hamal.html" data-name="hamal" data-type="astro"><h3><span class="el el-astro" style="padding:0">Hamal</span></h3><div class="meta">Astro · Vademecum</div><div class="snip">Astro del fuoco e della forza di Ahi Koati</div></a>
+<a class="card" href="astro-kaus.html" data-name="kaus" data-type="astro"><h3><span class="el el-astro" style="padding:0">Kaus</span></h3><div class="meta">Astro · Vademecum</div><div class="snip">Astro della gioia di Velos, araldo dei draghi</div></a>
+<a class="card" href="astro-lanx.html" data-name="lanx" data-type="astro"><h3><span class="el el-astro" style="padding:0">Lanx</span></h3><div class="meta">Astro · Vademecum</div><div class="snip">Astro dell&#x27;aria, conoscenza e legge di Eutomia</div></a>
+<a class="card" href="astro-ras-alhague.html" data-name="ras alhague" data-type="astro"><h3><span class="el el-astro" style="padding:0">Ras Alhague</span></h3><div class="meta">Astro · Vademecum</div><div class="snip">Astro della legge di Nakahi, presiede il concilio dei 13</div></a>
+<a class="card" href="astro-regolo.html" data-name="regolo" data-type="astro"><h3><span class="el el-astro" style="padding:0">Regolo</span></h3><div class="meta">Astro · Vademecum</div><div class="snip">Astro della guerra e della gloria di Xiphos</div></a>
+<a class="card" href="astro-sadalsuud.html" data-name="sadalsuud" data-type="astro"><h3><span class="el el-astro" style="padding:0">Sadalsuud</span></h3><div class="meta">Astro · Vademecum</div><div class="snip">Astro della magia di Zaer&#x27;Vassel</div></a>
+<a class="card" href="astro-spica.html" data-name="spica" data-type="astro"><h3><span class="el el-astro" style="padding:0">Spica</span></h3><div class="meta">Astro · Vademecum</div><div class="snip">Astro della mente di Damya</div></a></div><h2 id="sages" class="section-title">Saggi del Cielo Notturno (13)</h2><div class="grid"><a class="card" href="sage-adra-milaakh.html" data-name="adra-milaakh" data-type="sage"><h3><span class="el el-sage" style="padding:0">Adra-Milaakh</span></h3><div class="meta">Saggio del Cielo Notturno · Drive</div><div class="snip">Saggio di Mnemia, Falso Astro del Dolore, Signore del Pianto (MORTO)</div></a>
+<a class="card" href="sage-adrastea.html" data-name="adrastea" data-type="sage"><h3><span class="el el-sage" style="padding:0">Adrastea</span></h3><div class="meta">Saggio del Cielo Notturno · Drive</div><div class="snip">Saggio di Xiphos, Falso Astro dell&#x27;Onore, La Lama del Cielo Notturno</div></a>
+<a class="card" href="sage-cailemathon-lokihaar.html" data-name="cailemathon lokihaar" data-type="sage"><h3><span class="el el-sage" style="padding:0">Cailemathon Lokihaar</span></h3><div class="meta">Saggio del Cielo Notturno · Drive</div><div class="snip">Saggio di Velos, Falso Astro dell&#x27;Assenza, Il Dragone dell&#x27;Equilibrio (consapevole, mira a riallineare la Trama al Mare </div></a>
+<a class="card" href="sage-dakka-sha-hadi.html" data-name="dakka&#x27;sha&#x27;hadi" data-type="sage"><h3><span class="el el-sage" style="padding:0">Dakka&#x27;Sha&#x27;Hadi</span></h3><div class="meta">Saggio del Cielo Notturno · Drive</div><div class="snip">Saggio di Mizu, Falso Astro della Calma, Regina dei Sussurri, matrona degli Shadar&#x27;Kai</div></a>
+<a class="card" href="sage-daradarona.html" data-name="daradarona" data-type="sage"><h3><span class="el el-sage" style="padding:0">Daradarona</span></h3><div class="meta">Saggio del Cielo Notturno · Drive</div><div class="snip">Saggio di Eutomia, Falso Astro della Paura, Padrone del Teatro dell&#x27;Agnello</div></a>
+<a class="card" href="sage-ela-kreuff.html" data-name="ela kreuff" data-type="sage"><h3><span class="el el-sage" style="padding:0">Ela Kreuff</span></h3><div class="meta">Saggio del Cielo Notturno · Drive</div><div class="snip">Saggio di Paistos, Falso Astro dell&#x27;Innocenza, La Vergine Rossa (mira a destituire tutti gli Astri)</div></a>
+<a class="card" href="sage-ikal-ki-in-saasilen.html" data-name="ikal-ki&#x27;in-saasilen" data-type="sage"><h3><span class="el el-sage" style="padding:0">Ikal-Ki&#x27;in-Saasilen</span></h3><div class="meta">Saggio del Cielo Notturno · Drive</div><div class="snip">Saggio di Kyklora, Falso Astro della Fede, Il Divoraluce (MORTO)</div></a>
+<a class="card" href="sage-ixesha.html" data-name="ixesha" data-type="sage"><h3><span class="el el-sage" style="padding:0">Ixesha</span></h3><div class="meta">Saggio del Cielo Notturno · Drive</div><div class="snip">Saggio di Zaer&#x27;Vassel, Falso Astro della Libertà, L&#x27;Eterno Rintocco</div></a>
+<a class="card" href="sage-kirikourah.html" data-name="kirikourah" data-type="sage"><h3><span class="el el-sage" style="padding:0">Kirikourah</span></h3><div class="meta">Saggio del Cielo Notturno · Drive</div><div class="snip">Saggio di Ahi Koati, Falso Astro del Rimorso, Il Padre dell&#x27;Oro (in sonno sotto il Tama Afi)</div></a>
+<a class="card" href="sage-reo-via.html" data-name="reo via" data-type="sage"><h3><span class="el el-sage" style="padding:0">Reo Via</span></h3><div class="meta">Saggio del Cielo Notturno · Drive</div><div class="snip">Saggio di Lingra, Falso Astro del Tradimento, l&#x27;Arcangelo della Vendetta</div></a>
+<a class="card" href="sage-tessiria.html" data-name="tessiria" data-type="sage"><h3><span class="el el-sage" style="padding:0">Tessiria</span></h3><div class="meta">Saggio del Cielo Notturno · Drive</div><div class="snip">Saggio di Nakahi, Falso Astro del Futuro, signora delle illusioni (MORTA)</div></a>
+<a class="card" href="sage-vigurvel.html" data-name="vigurvel" data-type="sage"><h3><span class="el el-sage" style="padding:0">Vigurvel</span></h3><div class="meta">Saggio del Cielo Notturno · Drive</div><div class="snip">Saggio di Damya, ideatore del piano dei quadranti, antico signore dei trasmogrificatori</div></a>
+<a class="card" href="sage-zenit.html" data-name="zenit" data-type="sage"><h3><span class="el el-sage" style="padding:0">Zenit</span></h3><div class="meta">Saggio del Cielo Notturno · Drive</div><div class="snip">Saggio di Atua Rua, Falso Astro della Passione, L&#x27;Arconte della Polvere (MORTO)</div></a></div><h2 id="orgs" class="section-title">Organizzazioni e Gilde (11)</h2><div class="grid"><a class="card" href="discord-circo-dell-eclissi-1333437985387053239.html" data-name="circo dell&#x27;eclissi" data-type="org"><h3><span class="el el-org" style="padding:0">Circo dell&#x27;Eclissi</span></h3><div class="meta">Organizzazione · Discord</div><div class="snip">Circo itinerante</div></a>
+<a class="card" href="discord-congrega-delle-megere-di-nakahi-1325880608894877790.html" data-name="congrega delle megere di nakahi" data-type="org"><h3><span class="el el-org" style="padding:0">Congrega delle Megere di Nakahi</span></h3><div class="meta">Organizzazione · Discord</div><div class="snip">Hag coven sotto Nakahi</div></a>
+<a class="card" href="discord-custodi-del-candore-1344379186042765353.html" data-name="custodi del candore" data-type="org"><h3><span class="el el-org" style="padding:0">Custodi del Candore</span></h3><div class="meta">Organizzazione · Discord</div><div class="snip">Alchimisti segreti, scherno verso i Custodi dell&#x27;Indice</div></a>
+<a class="card" href="org-i-custodi-dell-indice.html" data-name="i custodi dell&#x27;indice" data-type="org"><h3><span class="el el-org" style="padding:0">I Custodi dell&#x27;Indice</span></h3><div class="meta">Organizzazione · PDF</div><div class="snip">Gilda spirituale-amministrativa di Nakahi, evoluzione dell&#x27;Ordine del Biacco</div></a>
+<a class="card" href="org-il-caravanserraglio.html" data-name="il caravanserraglio" data-type="org"><h3><span class="el el-org" style="padding:0">Il Caravanserraglio</span></h3><div class="meta">Organizzazione · PDF</div><div class="snip">Corporazione mercanti + gilda avventurieri di Nakahi (Triumviri Farnel/Udimon Kadris e Madriga Lodo-Kadris)</div></a>
+<a class="card" href="discord-il-principe-delle-fate-1341105523248070756.html" data-name="il principe delle fate" data-type="org"><h3><span class="el el-org" style="padding:0">Il Principe delle Fate</span></h3><div class="meta">Organizzazione · Discord</div><div class="snip">Banda di ladri gentiluomini, hanno rapinato la casa d&#x27;aste del Caravanserraglio</div></a>
+<a class="card" href="org-l-ordine-del-ferro-e-del-sangue.html" data-name="l&#x27;ordine del ferro e del sangue" data-type="org"><h3><span class="el el-org" style="padding:0">L&#x27;Ordine del Ferro e del Sangue</span></h3><div class="meta">Organizzazione · PDF</div><div class="snip">Gilda di avventurieri fondata da Ligirone, motto FERRUM ET SANGUIS</div></a>
+<a class="card" href="discord-la-gilda-degli-abietti-1333473785050828894.html" data-name="la gilda degli abietti" data-type="org"><h3><span class="el el-org" style="padding:0">La Gilda degli Abietti</span></h3><div class="meta">Organizzazione · Discord</div><div class="snip">Spin-off espulso della Gilda dei Passeri</div></a>
+<a class="card" href="org-la-gilda-dei-passeri.html" data-name="la gilda dei passeri" data-type="org"><h3><span class="el el-org" style="padding:0">La Gilda dei Passeri</span></h3><div class="meta">Organizzazione · PDF</div><div class="snip">Gilda di traffico informazioni fondata da Vhal e Alina d&#x27;Ontais, sedi a Velos e Mizu</div></a>
+<a class="card" href="discord-la-kaigetsu-1427370631250575541.html" data-name="la kaigetsu" data-type="org"><h3><span class="el el-org" style="padding:0">La KaiGetsu</span></h3><div class="meta">Organizzazione · Discord</div><div class="snip">Associazione criminale mizuana, alleata Gorudo</div></a>
+<a class="card" href="discord-lame-di-vetro-1425884541620322374.html" data-name="lame di vetro" data-type="org"><h3><span class="el el-org" style="padding:0">Lame di Vetro</span></h3><div class="meta">Organizzazione · Discord</div></a></div><h2 id="places" class="section-title">Luoghi (10)</h2><div class="grid"><a class="card" href="discord-casa-di-beatrice-1342514048104927272.html" data-name="casa di beatrice" data-type="place"><h3><span class="el el-place" style="padding:0">Casa di Beatrice</span></h3><div class="meta">Luogo · Discord</div><div class="snip">Orfanotrofio della Nakahi bassa, fondato da Grukhar</div></a>
+<a class="card" href="discord-castel-tahar-1315697445614911508.html" data-name="castel tahar" data-type="place"><h3><span class="el el-place" style="padding:0">Castel Tahar</span></h3><div class="meta">Luogo · Discord</div><div class="snip">Quartier generale dei Soli d&#x27;Argento, confine sud Nakahi/Eutomia</div></a>
+<a class="card" href="discord-castel-tahar-legacy-1356955546732859503.html" data-name="castel tahar (legacy)" data-type="place"><h3><span class="el el-place" style="padding:0">Castel Tahar (Legacy)</span></h3><div class="meta">Luogo · Discord</div><div class="snip">Versione legacy del documento di Castel Tahar</div></a>
+<a class="card" href="discord-distretto-nox-1419267041801801869.html" data-name="distretto nox" data-type="place"><h3><span class="el el-place" style="padding:0">Distretto Nox</span></h3><div class="meta">Luogo · Discord</div><div class="snip">Quartiere notturno di Nakahi</div></a>
+<a class="card" href="discord-il-bastione-dei-dannati-1353809006065352796.html" data-name="il bastione dei dannati" data-type="place"><h3><span class="el el-place" style="padding:0">Il Bastione dei Dannati</span></h3><div class="meta">Luogo · Discord</div><div class="snip">Antico Palazzo Caeloria, sede della casata Caellian</div></a>
+<a class="card" href="discord-la-mola-e-la-gerla-1315698716811989032.html" data-name="la mola e la gerla" data-type="place"><h3><span class="el el-place" style="padding:0">La mola e la Gerla</span></h3><div class="meta">Luogo · Discord</div><div class="snip">Piccola taverna malfamata dei bassifondi di Nakahi</div></a>
+<a class="card" href="discord-le-prigioni-di-foscoceppo-1343763575356788798.html" data-name="le prigioni di foscoceppo" data-type="place"><h3><span class="el el-place" style="padding:0">Le prigioni di Foscoceppo</span></h3><div class="meta">Luogo · Discord</div><div class="snip">Torre prigione fatiscente a sud di Nakahi</div></a>
+<a class="card" href="discord-taverna-il-respiro-del-mare-1335990649719230534.html" data-name="taverna il respiro del mare" data-type="place"><h3><span class="el el-place" style="padding:0">Taverna Il Respiro del Mare</span></h3><div class="meta">Luogo · Discord</div><div class="snip">Tavernetta nobiliare di Nakahi</div></a>
+<a class="card" href="discord-taverna-l-aquila-dorata-1315708742259703879.html" data-name="taverna l&#x27;aquila dorata" data-type="place"><h3><span class="el el-place" style="padding:0">Taverna l&#x27;Aquila Dorata</span></h3><div class="meta">Luogo · Discord</div><div class="snip">Taverna dei quartieri ricchi di Nakahi</div></a>
+<a class="card" href="discord-valcarrione-1352587544369430581.html" data-name="valcarrione" data-type="place"><h3><span class="el el-place" style="padding:0">Valcarrione</span></h3><div class="meta">Luogo · Discord</div><div class="snip">Piccolo villaggio di confine vicino a Nakahi</div></a></div><h2 id="persons" class="section-title">Persone (10)</h2><div class="grid"><a class="card" href="discord-anastasia-d-alfiero-1403092429229395978.html" data-name="anastasia d&#x27;alfiero" data-type="person"><h3><span class="el el-person" style="padding:0">Anastasia d&#x27;Alfiero</span></h3><div class="meta">Persona · Discord</div><div class="snip">Maestro dei Custodi dell&#x27;Indice</div></a>
+<a class="card" href="discord-aureliano-virelli-1471897863343702016.html" data-name="aureliano virelli" data-type="person"><h3><span class="el el-person" style="padding:0">Aureliano Virelli</span></h3><div class="meta">Persona · Discord</div><div class="snip">Vampiro del Coro dei Pallidi, di Nakahi</div></a>
+<a class="card" href="discord-bastièn-grandgousier-1349330822280511488.html" data-name="bastièn grandgousier" data-type="person"><h3><span class="el el-person" style="padding:0">Bastièn Grandgousier</span></h3><div class="meta">Persona · Discord</div><div class="snip">Entità di potere insondabile</div></a>
+<a class="card" href="discord-don-cassio-serpieri-1415648981844889745.html" data-name="don cassio serpieri" data-type="person"><h3><span class="el el-person" style="padding:0">Don Cassio Serpieri</span></h3><div class="meta">Persona · Discord</div><div class="snip">Faccendiere del Caravanserraglio</div></a>
+<a class="card" href="entity-santo-spada.html" data-name="il santo della spada" data-type="person"><h3><span class="el el-person" style="padding:0">Il Santo della Spada</span></h3><div class="meta">Persona · Vademecum</div><div class="snip">Campione samurai di Mizu, legittimato da sette katane fatate</div></a>
+<a class="card" href="discord-joaquin-1369127039977914448.html" data-name="joaquin" data-type="person"><h3><span class="el el-person" style="padding:0">Joaquin</span></h3><div class="meta">Persona · Discord</div><div class="snip">Ragazzo dei bassifondi di Nakahi (ucciso)</div></a>
+<a class="card" href="discord-l-aruspice-1349335047332692029.html" data-name="l&#x27;aruspice" data-type="person"><h3><span class="el el-person" style="padding:0">L&#x27;Aruspice</span></h3><div class="meta">Persona · Discord</div><div class="snip">Figura misteriosa, conosciuta solo a Prospero Basso</div></a>
+<a class="card" href="discord-mercurio-vellone-1343715448268787763.html" data-name="mercurio vellone" data-type="person"><h3><span class="el el-person" style="padding:0">Mercurio Vellone</span></h3><div class="meta">Persona · Discord</div><div class="snip">Faccendiere del Caravanserraglio (recente)</div></a>
+<a class="card" href="discord-siria-valmora-1403070578981867611.html" data-name="siria valmora" data-type="person"><h3><span class="el el-person" style="padding:0">Siria Valmora</span></h3><div class="meta">Persona · Discord</div><div class="snip">Ombra dell&#x27;Ordine del Ferro e del Sangue</div></a>
+<a class="card" href="person-tordek.html" data-name="tordek" data-type="person"><h3><span class="el el-person" style="padding:0">Tordek</span></h3><div class="meta">Persona · Drive</div><div class="snip">Re Immortale dei nani di Turasar, anima nell&#x27;arma &quot;Colei che Distrugge&quot;</div></a></div><h2 id="events" class="section-title">Eventi e Lore (3)</h2><div class="grid"><a class="card" href="discord-demoni-a-nakahi-1328779710326636684.html" data-name="demoni a nakahi" data-type="event"><h3><span class="el el-event" style="padding:0">Demoni a Nakahi</span></h3><div class="meta">Evento/Lore · Discord</div><div class="snip">Lore demoniaco delle avventure a Nakahi</div></a>
+<a class="card" href="discord-impresa-dell-occhio-di-alabastro-1376615392675364864.html" data-name="impresa dell&#x27;occhio di alabastro" data-type="event"><h3><span class="el el-event" style="padding:0">Impresa dell&#x27;Occhio di Alabastro</span></h3><div class="meta">Evento/Lore · Discord</div><div class="snip">Quest/saga</div></a>
+<a class="card" href="discord-la-profezia-1341932282298237020.html" data-name="la profezia" data-type="event"><h3><span class="el el-event" style="padding:0">La Profezia</span></h3><div class="meta">Evento/Lore · Discord</div><div class="snip">Profezia che parla della caduta delle mura di Nakahi e dei cinque prescelti</div></a></div><h2 id="concepts" class="section-title">Concetti (14)</h2><div class="grid"><a class="card" href="entity-azareus.html" data-name="azareus" data-type="concept"><h3><span class="el el-concept" style="padding:0">Azareus</span></h3><div class="meta">Concetto · Vademecum</div><div class="snip">Settimo figlio del dio sole</div></a>
+<a class="card" href="concept-caellian.html" data-name="casata caellian" data-type="concept"><h3><span class="el el-concept" style="padding:0">Casata Caellian</span></h3><div class="meta">Concetto · Derivato</div><div class="snip">Antica famiglia legata al Bastione dei Dannati e Palazzo Caeloria</div></a>
+<a class="card" href="entity-cerebrax.html" data-name="cerebrax" data-type="concept"><h3><span class="el el-concept" style="padding:0">Cerebrax</span></h3><div class="meta">Concetto · Vademecum</div><div class="snip">Falso astro della conoscenza, fuso con Rokhar in Aldebaran</div></a>
+<a class="card" href="concept-cielo-notturno.html" data-name="cielo notturno" data-type="concept"><h3><span class="el el-concept" style="padding:0">Cielo Notturno</span></h3><div class="meta">Concetto · Derivato</div><div class="snip">Castello di pietra nera dei Saggi, antichi trasmogrificatori sopravvissuti</div></a>
+<a class="card" href="concept-falsi-astri.html" data-name="falsi astri" data-type="concept"><h3><span class="el el-concept" style="padding:0">Falsi Astri</span></h3><div class="meta">Concetto · Derivato</div><div class="snip">Conglomerati di ombre con emozione comune che acquisiscono coscienza</div></a>
+<a class="card" href="concept-quadranti.html" data-name="i quadranti" data-type="concept"><h3><span class="el el-concept" style="padding:0">I Quadranti</span></h3><div class="meta">Concetto · Derivato</div><div class="snip">Antichi artefatti magici che selezionano i candidati Astro</div></a>
+<a class="card" href="discord-il-circolo-del-sale-1471912146794184744.html" data-name="il circolo del sale" data-type="concept"><h3><span class="el el-concept" style="padding:0">Il Circolo del Sale</span></h3><div class="meta">Concetto · Discord</div><div class="snip">Cerchia/circolo legato a Mercurio Vellone e all&#x27;Ordine del Ferro e del Sangue</div></a>
+<a class="card" href="entity-jared.html" data-name="jared" data-type="concept"><h3><span class="el el-concept" style="padding:0">Jared</span></h3><div class="meta">Concetto · Vademecum</div><div class="snip">Maestro dell&#x27;inganno, demone maggiore nato dall&#x27;halfling Sylvan</div></a>
+<a class="card" href="concept-ombre.html" data-name="le ombre" data-type="concept"><h3><span class="el el-concept" style="padding:0">Le Ombre</span></h3><div class="meta">Concetto · Derivato</div><div class="snip">Creature di fumo nero nate dalle persone svuotate dai trasmogrificatori</div></a>
+<a class="card" href="concept-magia-astrale.html" data-name="magia astrale" data-type="concept"><h3><span class="el el-concept" style="padding:0">Magia Astrale</span></h3><div class="meta">Concetto · Derivato</div><div class="snip">Fonte di potere unica degli Astri, slot equivalenti a 15° livello</div></a>
+<a class="card" href="discord-monster-hunters-1315699863215800344.html" data-name="monster hunters" data-type="concept"><h3><span class="el el-concept" style="padding:0">Monster Hunters</span></h3><div class="meta">Concetto · Discord</div><div class="snip">Sala trofei di caccia</div></a>
+<a class="card" href="entity-neramorte.html" data-name="neramorte" data-type="concept"><h3><span class="el el-concept" style="padding:0">Neramorte</span></h3><div class="meta">Concetto · Vademecum</div><div class="snip">Divinità della morte e distruzione dei draghi</div></a>
+<a class="card" href="concept-trasmogrificazione.html" data-name="trasmogrificazione" data-type="concept"><h3><span class="el el-concept" style="padding:0">Trasmogrificazione</span></h3><div class="meta">Concetto · Derivato</div><div class="snip">Antica tecnomagia che estrae conoscenze e le incide in oggetti</div></a>
+<a class="card" href="entity-veraluce.html" data-name="veraluce" data-type="concept"><h3><span class="el el-concept" style="padding:0">Veraluce</span></h3><div class="meta">Concetto · Vademecum</div><div class="snip">Divinità della vita e rinascita dei draghi</div></a></div><h2 id="worlds" class="section-title">Mondo (2)</h2><div class="grid"><a class="card" href="concept-vastria.html" data-name="vastria" data-type="world"><h3><span class="el el-world" style="padding:0">Vastria</span></h3><div class="meta">Mondo · Derivato</div><div class="snip">Continente intero su cui si svolge il Westmarch</div></a>
+<a class="card" href="concept-westmarch.html" data-name="westmarch" data-type="world"><h3><span class="el el-world" style="padding:0">Westmarch</span></h3><div class="meta">Mondo · Derivato</div><div class="snip">Saga/ambientazione di gioco</div></a></div>
+<p style="margin-top:30px;color:var(--fg-muted);font-size:11px;text-align:center">Generato il 08 May 2026 · 21:29 · Westmarch Wiki · Hyperlink automatici tra tutte le menzioni</p>
+</div>
+<script>
+const TYPE_LABELS = {"city": "Citt\u00e0", "place": "Luogo", "person": "Persona", "org": "Organizzazione", "event": "Evento/Lore", "concept": "Concetto", "astro": "Astro", "sage": "Saggio del Cielo Notturno", "world": "Mondo"};
+const enabled = new Set(Object.keys(TYPE_LABELS));
+const filt = document.getElementById('filters');
+Object.entries(TYPE_LABELS).forEach(([t,l]) => {
+  const b = document.createElement('button');
+  b.dataset.t = t; b.textContent = l;
+  b.onclick = () => {
+    if (enabled.has(t)) {enabled.delete(t); b.classList.add('off');}
+    else {enabled.add(t); b.classList.remove('off');}
+    apply();
+  };
+  filt.appendChild(b);
+});
+const cards = document.querySelectorAll('.card');
+const search = document.getElementById('search');
+function apply() {
+  const q = (search.value||'').trim().toLowerCase();
+  cards.forEach(c => {
+    const okType = enabled.has(c.dataset.type);
+    const okQ = !q || (c.dataset.name||'').includes(q) || (c.textContent||'').toLowerCase().includes(q);
+    c.style.display = (okType && okQ) ? '' : 'none';
+  });
+  // Hide section titles whose grid is empty
+  document.querySelectorAll('.grid').forEach(g => {
+    const visible = Array.from(g.querySelectorAll('.card')).some(c => c.style.display !== 'none');
+    g.style.display = visible ? '' : 'none';
+    const title = g.previousElementSibling;
+    if (title && title.classList.contains('section-title')) title.style.display = visible ? '' : 'none';
+  });
+}
+search.addEventListener('input', apply);
+</script></body></html>
