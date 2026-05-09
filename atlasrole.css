@@ -896,3 +896,65 @@ h4 { font-size: 1.05rem; color: var(--gold); }
 
 /* Stat block aggiornato */
 .stats .stat b { color: var(--cyan-bright); }
+
+
+/* === v6.5: Big CTA "Mappa cliccabile" === */
+.hero-cta {
+  display: flex;
+  justify-content: center;
+  margin: 28px auto 8px;
+}
+.hero-cta a {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 36px;
+  background: linear-gradient(135deg, rgba(95, 213, 232, .22), rgba(233, 201, 127, .18));
+  border: 2px solid var(--cyan-bright);
+  border-radius: 14px;
+  color: var(--paper);
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-decoration: none;
+  letter-spacing: .01em;
+  box-shadow: 0 6px 32px rgba(95, 213, 232, .25), inset 0 0 0 1px rgba(240, 232, 216, .1);
+  transition: all .3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.hero-cta a::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(240, 232, 216, .15), transparent);
+  transition: left .6s ease;
+}
+.hero-cta a:hover {
+  transform: translateY(-3px) scale(1.02);
+  border-color: var(--gold);
+  box-shadow: 0 12px 40px rgba(233, 201, 127, .35), inset 0 0 0 1px rgba(240, 232, 216, .2);
+  color: var(--gold);
+}
+.hero-cta a:hover::before { left: 100%; }
+.hero-cta .cta-icon {
+  font-size: 2rem;
+  filter: drop-shadow(0 0 8px var(--cyan-bright));
+}
+.hero-cta .cta-sub {
+  display: block;
+  font-style: normal;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: .72rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  opacity: .65;
+  margin-top: 2px;
+  font-weight: 400;
+}
+@media (max-width: 600px) {
+  .hero-cta a { font-size: 1.15rem; padding: 14px 22px; }
+  .hero-cta .cta-icon { font-size: 1.5rem; }
+}
