@@ -898,24 +898,27 @@ h4 { font-size: 1.05rem; color: var(--gold); }
 .stats .stat b { color: var(--cyan-bright); }
 
 
-/* === v6.5: Big CTA "Mappa cliccabile" === */
+/* === v6.6: CTA mappa sotto i tabs, allineato come i tabs === */
 .hero-cta {
   display: flex;
   justify-content: center;
-  margin: 28px auto 8px;
+  margin: 14px auto 28px;
+  max-width: 700px;
 }
 .hero-cta a {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 18px 36px;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+  padding: 18px 24px;
   background: linear-gradient(135deg, rgba(95, 213, 232, .22), rgba(233, 201, 127, .18));
   border: 2px solid var(--cyan-bright);
   border-radius: 14px;
   color: var(--paper);
   font-family: 'Playfair Display', serif;
   font-style: italic;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 500;
   text-decoration: none;
   letter-spacing: .01em;
@@ -923,6 +926,7 @@ h4 { font-size: 1.05rem; color: var(--gold); }
   transition: all .3s ease;
   position: relative;
   overflow: hidden;
+  text-align: center;
 }
 .hero-cta a::before {
   content: '';
@@ -933,28 +937,28 @@ h4 { font-size: 1.05rem; color: var(--gold); }
   transition: left .6s ease;
 }
 .hero-cta a:hover {
-  transform: translateY(-3px) scale(1.02);
+  transform: translateY(-3px);
   border-color: var(--gold);
   box-shadow: 0 12px 40px rgba(233, 201, 127, .35), inset 0 0 0 1px rgba(240, 232, 216, .2);
   color: var(--gold);
 }
 .hero-cta a:hover::before { left: 100%; }
 .hero-cta .cta-icon {
-  font-size: 2rem;
+  font-size: 1.8rem;
   filter: drop-shadow(0 0 8px var(--cyan-bright));
 }
 .hero-cta .cta-sub {
   display: block;
   font-style: normal;
   font-family: 'Inter', system-ui, sans-serif;
-  font-size: .72rem;
+  font-size: .68rem;
   letter-spacing: .14em;
   text-transform: uppercase;
   opacity: .65;
-  margin-top: 2px;
+  margin-top: 3px;
   font-weight: 400;
 }
 @media (max-width: 600px) {
-  .hero-cta a { font-size: 1.15rem; padding: 14px 22px; }
-  .hero-cta .cta-icon { font-size: 1.5rem; }
+  .hero-cta a { font-size: 1.05rem; padding: 14px 18px; }
+  .hero-cta .cta-icon { font-size: 1.4rem; }
 }
