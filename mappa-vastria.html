@@ -16,32 +16,28 @@
   .header-controls { display: flex; gap: 8px; }
   .btn-edit, .btn-secondary { padding: 7px 14px; border-radius: 6px; cursor: pointer; font-size: .85rem; background: rgba(95,213,232,.12); color: var(--cyan-bright); border: 1px solid rgba(95,213,232,.4); font-family: 'Inter', system-ui, sans-serif; }
   .btn-edit:hover { background: rgba(95,213,232,.22); }
+  .btn-edit.locked::before { content: '🔒 '; }
   .btn-edit.active { background: #ffd76b; color: var(--night-deep); border-color: #ffd76b; font-weight: 600; }
   .btn-secondary { background: transparent; color: rgba(240,232,216,.7); border-color: rgba(240,232,216,.3); }
   #vastria-map { flex: 1; background: #06101f; position: relative; }
   .leaflet-container { background: #06101f !important; cursor: grab; }
   .leaflet-container.leaflet-dragging { cursor: grabbing; }
-
   .leaflet-marker-icon { pointer-events: none !important; background: transparent !important; border: none !important; }
   body.editmode .leaflet-marker-icon { pointer-events: auto !important; cursor: move !important; }
   body:not(.editmode) .leaflet-marker-icon .clickable { pointer-events: auto; }
-
   .lbl { text-align: center; white-space: nowrap; text-shadow: 0 0 6px #000, 0 0 12px #000, 0 1px 2px #000; font-family: 'Playfair Display', serif; font-style: italic; }
-  .lbl.city { color: var(--gold); font-size: 1.05rem; font-weight: 600; }
-  .lbl.city .pin { display: block; width: 12px; height: 12px; margin: 0 auto 2px; background: var(--gold); border: 2px solid #fff; border-radius: 50%; box-shadow: 0 0 8px var(--gold), 0 0 16px rgba(233,201,127,.5); }
+  .lbl.city { font-size: 1.05rem; font-weight: 600; }
+  .lbl.city .pin { display: block; width: 12px; height: 12px; margin: 0 auto 2px; background: currentColor; border: 2px solid #fff; border-radius: 50%; box-shadow: 0 0 8px currentColor, 0 0 16px rgba(233,201,127,.5); }
   .lbl.city.clickable:hover { color: var(--cyan-bright); }
-  .lbl.city.clickable:hover .pin { background: var(--cyan-bright); box-shadow: 0 0 8px var(--cyan-bright); }
   .lbl.city a { color: inherit; text-decoration: none; }
-  .lbl.minor-city { color: rgba(240,232,216,.85); font-style: italic; font-family: 'Inter', system-ui, sans-serif; font-size: .78rem; }
-  .lbl.minor-city .pin { display: inline-block; width: 5px; height: 5px; background: rgba(240,232,216,.6); border-radius: 50%; margin-right: 3px; vertical-align: middle; border: 1px solid #fff; }
-  .lbl.isle { color: rgba(143,200,216,.85); font-style: italic; font-size: .78rem; font-family: 'Inter', system-ui, sans-serif; }
-  .lbl.isle .pin { display: inline-block; width: 5px; height: 5px; background: rgba(143,200,216,.6); border-radius: 50%; margin-right: 3px; vertical-align: middle; }
-  .lbl.mountain { color: rgba(180,170,160,.8); font-style: italic; font-size: .76rem; font-family: 'Inter', system-ui, sans-serif; }
-  .lbl.region { color: rgba(233,201,127,.7); font-size: .92rem; letter-spacing: .14em; text-transform: uppercase; font-style: normal; font-family: 'Playfair Display', serif; }
-  .lbl.sea { color: rgba(95,213,232,.7); font-size: 1rem; letter-spacing: .14em; font-style: italic; font-family: 'Playfair Display', serif; }
-  .lbl.lake { color: rgba(255,138,122,.75); font-style: italic; font-size: .85rem; font-family: 'Playfair Display', serif; }
-  body.editmode .lbl { outline: 1px dashed rgba(255,107,107,.6); outline-offset: 2px; }
+  .lbl.minor-city, .lbl.isle, .lbl.mountain { font-style: italic; font-family: 'Inter', system-ui, sans-serif; font-size: .78rem; }
+  .lbl.minor-city .pin, .lbl.isle .pin { display: inline-block; width: 5px; height: 5px; background: currentColor; border-radius: 50%; margin-right: 3px; vertical-align: middle; border: 1px solid #fff; }
+  .lbl.region { font-size: .92rem; letter-spacing: .14em; text-transform: uppercase; font-style: normal; font-family: 'Playfair Display', serif; }
+  .lbl.sea { font-size: 1rem; letter-spacing: .14em; font-style: italic; font-family: 'Playfair Display', serif; }
+  .lbl.lake { font-style: italic; font-size: .85rem; font-family: 'Playfair Display', serif; }
+  body.editmode .lbl { outline: 1px dashed rgba(255,107,107,.6); outline-offset: 2px; padding: 0 4px; }
   body.editmode .lbl:hover { outline-color: #ffd76b; outline-style: solid; }
+  body.editmode .lbl.selected { outline: 2px solid #ffd76b !important; box-shadow: 0 0 12px rgba(255,215,107,.6); }
   .leaflet-popup-content-wrapper { background: var(--night); color: var(--paper); border: 1px solid rgba(95,213,232,.3); }
   .leaflet-popup-tip { background: var(--night); }
   .leaflet-popup-content h3 { font-family: 'Playfair Display', serif; font-style: italic; color: var(--cyan-bright); margin: 0 0 4px; font-weight: 400; }
@@ -49,25 +45,37 @@
   .leaflet-popup-content a.btn { display: inline-block; padding: 4px 10px; background: rgba(95,213,232,.15); color: var(--cyan-bright); border: 1px solid rgba(95,213,232,.4); border-radius: 4px; text-decoration: none; font-size: .85rem; }
   .map-legend { position: absolute; bottom: 16px; left: 16px; z-index: 999; background: rgba(6,16,31,.85); border: 1px solid rgba(95,213,232,.3); border-radius: 8px; padding: 10px 14px; font-size: .8rem; color: var(--paper); backdrop-filter: blur(6px); }
   .map-legend h4 { margin: 0 0 4px; font-family: 'Playfair Display', serif; font-style: italic; color: var(--cyan-bright); font-weight: 400; }
-  .map-legend .row { display: flex; align-items: center; gap: 6px; margin: 2px 0; }
-  .map-legend .swatch { width: 10px; height: 10px; border-radius: 50%; }
   .leaflet-control-zoom a { background: var(--night) !important; color: var(--cyan-bright) !important; border-color: rgba(95,213,232,.3) !important; font-size: 18px !important; }
   .leaflet-control-zoom a:hover { background: rgba(95,213,232,.15) !important; }
-  #edit-panel { position: absolute; top: 16px; right: 16px; z-index: 1000; width: 380px; max-height: calc(100vh - 130px); background: rgba(6,16,31,.95); border: 1px solid rgba(255,107,107,.4); border-radius: 10px; padding: 14px; backdrop-filter: blur(8px); color: var(--paper); display: none; flex-direction: column; }
+
+  /* Edit panel */
+  #edit-panel { position: absolute; top: 16px; right: 16px; z-index: 1000; width: 360px; max-height: calc(100vh - 130px); background: rgba(6,16,31,.95); border: 1px solid rgba(255,107,107,.4); border-radius: 10px; padding: 14px; backdrop-filter: blur(8px); color: var(--paper); display: none; flex-direction: column; }
   body.editmode #edit-panel { display: flex; }
   #edit-panel h3 { margin: 0 0 8px; font-family: 'Playfair Display', serif; font-style: italic; color: #ffd76b; font-weight: 400; }
-  #edit-panel .hint { font-size: .8rem; color: rgba(240,232,216,.75); margin-bottom: 10px; }
-  #coord-list { flex: 1; overflow-y: auto; font-family: ui-monospace, 'SF Mono', monospace; font-size: .72rem; background: rgba(6,16,31,.6); border: 1px solid rgba(95,213,232,.18); border-radius: 6px; padding: 8px; margin-bottom: 8px; max-height: 45vh; }
-  #coord-list .row { padding: 2px 0; border-bottom: 1px dotted rgba(95,213,232,.08); }
-  #coord-list .row.dirty { color: #ffd76b; font-weight: 500; }
+  #edit-panel .hint { font-size: .8rem; color: rgba(240,232,216,.75); margin-bottom: 8px; }
+  .selected-editor { background: rgba(255,215,107,.06); border: 1px solid rgba(255,215,107,.3); border-radius: 6px; padding: 10px; margin-bottom: 10px; }
+  .selected-editor h4 { margin: 0 0 8px; color: #ffd76b; font-family: 'Playfair Display', serif; font-style: italic; font-size: 1rem; }
+  .selected-editor .field { display: flex; align-items: center; gap: 6px; margin: 5px 0; }
+  .selected-editor .field label { font-size: .75rem; min-width: 60px; color: rgba(240,232,216,.7); }
+  .selected-editor .field input[type=text] { flex: 1; padding: 4px 6px; background: rgba(6,16,31,.6); border: 1px solid rgba(95,213,232,.3); color: var(--paper); border-radius: 4px; font-size: .82rem; }
+  .selected-editor .field input[type=range] { flex: 1; }
+  .selected-editor .field input[type=color] { width: 40px; height: 26px; border: 1px solid rgba(95,213,232,.3); background: transparent; cursor: pointer; }
+  .selected-editor .field .val { font-family: ui-monospace, monospace; font-size: .78rem; color: var(--cyan-bright); min-width: 50px; }
+  .selected-editor .actions { display: flex; gap: 6px; margin-top: 6px; }
+  .selected-editor .actions button { flex: 1; padding: 4px 8px; font-size: .78rem; border-radius: 4px; cursor: pointer; }
+
+  #coord-list { flex: 1; overflow-y: auto; font-family: ui-monospace, 'SF Mono', monospace; font-size: .72rem; background: rgba(6,16,31,.6); border: 1px solid rgba(95,213,232,.18); border-radius: 6px; padding: 6px; margin-bottom: 8px; max-height: 30vh; }
+  #coord-list .row { padding: 2px 0; border-bottom: 1px dotted rgba(95,213,232,.08); cursor: pointer; }
+  #coord-list .row:hover { background: rgba(95,213,232,.08); }
+  #coord-list .row.dirty { color: #ffd76b; }
   #coord-list .row b { color: var(--cyan-bright); }
-  #coord-list .group-title { color: var(--gold); font-weight: 600; padding-top: 6px; padding-bottom: 4px; font-style: italic; }
-  #json-out { width: 100%; min-height: 80px; max-height: 180px; background: rgba(6,16,31,.6); border: 1px solid rgba(95,213,232,.2); border-radius: 6px; color: var(--paper); padding: 8px; font-family: ui-monospace, monospace; font-size: .7rem; resize: vertical; }
+  #coord-list .group-title { color: var(--gold); font-weight: 600; padding-top: 4px; cursor: default; }
+  #json-out { width: 100%; min-height: 60px; max-height: 140px; background: rgba(6,16,31,.6); border: 1px solid rgba(95,213,232,.2); border-radius: 6px; color: var(--paper); padding: 6px; font-family: ui-monospace, monospace; font-size: .68rem; resize: vertical; }
   .panel-buttons { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
   .panel-buttons button { flex: 1; padding: 6px 10px; border-radius: 5px; cursor: pointer; font-size: .78rem; border: 1px solid rgba(95,213,232,.4); background: rgba(95,213,232,.1); color: var(--cyan-bright); }
   .panel-buttons button.danger { border-color: rgba(255,107,107,.4); color: #ff8a7a; }
   #copy-status { font-size: .78rem; color: var(--gold); margin-top: 4px; min-height: 1em; }
-  .panel-filter input { width: 100%; padding: 5px 8px; background: rgba(6,16,31,.5); border: 1px solid rgba(95,213,232,.2); color: var(--paper); border-radius: 4px; font-size: .78rem; }
+  .panel-filter input { width: 100%; padding: 5px 8px; background: rgba(6,16,31,.5); border: 1px solid rgba(95,213,232,.2); color: var(--paper); border-radius: 4px; font-size: .78rem; margin-bottom: 6px; }
 </style>
 </head>
 <body>
@@ -76,38 +84,61 @@
 <div class="map-header">
 <div>
 <h1>Vastria — Mappa interattiva</h1>
-<p>Trascina per panare · rotella o pulsanti +/− per zoom · clicca pin <b style="color:var(--gold)">oro</b> per pagina entità · <b style="color:#ffd76b">Edit mode</b> per ritocchi successivi</p>
+<p>Trascina, zoom rotella · clic pin <b style="color:var(--gold)">oro</b> per scheda · <b style="color:#ffd76b">Edit</b> 🔒 per modificare posizione, nome, dimensione e colore</p>
 </div>
 <div class="header-controls">
-<button class="btn-edit" id="toggle-edit">✏️ Edit</button>
+<button class="btn-edit locked" id="toggle-edit">Edit</button>
 <button class="btn-secondary" id="btn-fit">⛶ Fit</button>
 </div>
 </div>
 <div id="vastria-map"></div>
 <div class="map-legend">
 <h4>Legenda</h4>
-<div class="row"><span class="swatch" style="background:var(--gold);border:1px solid #fff"></span> 15 città principali (cliccabili)</div>
-<div class="row"><span class="swatch" style="background:rgba(240,232,216,.6)"></span> Località minori</div>
-<div class="row"><span style="color:rgba(95,213,232,.7);font-style:italic">Mari</span> · <span style="color:rgba(233,201,127,.7);text-transform:uppercase;font-size:.8em">Regioni</span></div>
+<div style="font-size:.78rem">15 città cliccabili (oro) · 30 minori · click apre scheda</div>
 </div>
 
 <div id="edit-panel">
-<h3>✏️ Edit · 45 label</h3>
-<div class="hint">Trascina qualsiasi label per ritoccare. Salvataggio automatico locale. Per fissare definitivamente, copia il JSON e incollamelo in chat.</div>
+<h3>✏️ Edit</h3>
+<div class="selected-editor" id="sel-edit" style="display:none">
+<h4>Selezionato: <span id="sel-name"></span></h4>
+<div class="field"><label>Nome</label><input type="text" id="sel-text"></div>
+<div class="field"><label>Colore</label><input type="color" id="sel-color"><span class="val" id="sel-color-val"></span></div>
+<div class="field"><label>Dimensione</label><input type="range" id="sel-size" min="0.5" max="2.5" step="0.05"><span class="val" id="sel-size-val"></span></div>
+<div class="field"><label>Posizione</label><span class="val" id="sel-pos"></span></div>
+<div class="actions"><button id="sel-reset" class="danger">↺ Default</button><button id="sel-close">Chiudi</button></div>
+</div>
+
+<div class="hint">Trascina i label per spostarli. Click su un label per modificarne nome, colore, grandezza.</div>
 <div class="panel-filter"><input type="text" id="filter" placeholder="Filtra…"></div>
 <div id="coord-list"></div>
 <textarea id="json-out" readonly></textarea>
 <div class="panel-buttons">
 <button id="btn-copy">📋 Copia JSON</button>
 <button id="btn-save">💾 Salva</button>
-<button id="btn-reset-coords" class="danger">↺ Ripristina default</button>
+<button id="btn-reset-coords" class="danger">↺ Reset tutto</button>
 </div>
 <div id="copy-status"></div>
 </div>
 </div>
-<footer class="atlas-footer"><div>Atlas Wiki · Vastria · <a href="https://www.atlasrole.com" target="_blank" rel="noopener">atlasrole.com</a></div><div class="meta">Generato il 09 May 2026 · Mappa interattiva v3 · 15 città cliccabili · 45 label</div></footer>
+<footer class="atlas-footer"><div>Atlas Wiki · Vastria</div><div class="meta">Generato il 09 May 2026 · Mappa interattiva v4 · edit gated · 45 label · 30 schede generate</div></footer>
 
 <script>
+const PWD_HASH = '55bdd6bb9b1839c8f8e7c3459e61f5537d0691c6b4c8fa827d594708f4d63db2';
+async function sha256(s) {
+  const buf = new TextEncoder().encode(s);
+  const h = await crypto.subtle.digest('SHA-256', buf);
+  return Array.from(new Uint8Array(h)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+async function checkPwd() {
+  if (sessionStorage.getItem('atlas-edit-auth') === '1') return true;
+  const pwd = prompt('🔒 Password per Edit mode:');
+  if (!pwd) return false;
+  const h = await sha256(pwd);
+  if (h !== PWD_HASH) { alert('Password errata'); return false; }
+  sessionStorage.setItem('atlas-edit-auth', '1');
+  return true;
+}
+
 const initialLabels = [{"id": "city-paistos", "name": "Paistos", "type": "city", "x": 26.13, "y": 30.84, "href": "city-paistos.html", "info": "Astro: Al Tarf"}, {"id": "city-turasar", "name": "Turasar", "type": "city", "x": 22.09, "y": 37.97, "href": "city-turasar.html", "info": "Astro: Tordek"}, {"id": "city-damya", "name": "Damya", "type": "city", "x": 26.34, "y": 46.69, "href": "city-damya.html", "info": "Astro: Spica"}, {"id": "city-mnemia", "name": "Mnemia", "type": "city", "x": 50.28, "y": 16.91, "href": "city-mnemia.html", "info": "Astro: Aldebaran"}, {"id": "city-velos", "name": "Velos", "type": "city", "x": 55.38, "y": 23, "href": "city-velos.html", "info": "Astro: Kaus"}, {"id": "city-mizu", "name": "Mizu", "type": "city", "x": 51.91, "y": 41.66, "href": "city-mizu.html", "info": "Astro: Alrisha"}, {"id": "city-mizurin", "name": "Mizurin", "type": "city", "x": 57.06, "y": 45.72, "href": "city-mizurin.html", "info": "Esuli di Mizu"}, {"id": "city-atua-rua", "name": "Atua Rua", "type": "city", "x": 64.88, "y": 49.56, "href": "city-atua-rua.html", "info": "Astro: Castore e Polluce"}, {"id": "city-ahi-koati", "name": "Ahi Koati", "type": "city", "x": 77.22, "y": 44.94, "href": "city-ahi-koati.html", "info": "Astro: Hamal"}, {"id": "city-xiphos", "name": "Xiphos", "type": "city", "x": 79.28, "y": 63.72, "href": "city-xiphos.html", "info": "Astro: Regolo"}, {"id": "city-zaer-vassel", "name": "Zaer'Vassel", "type": "city", "x": 8.53, "y": 50.82, "href": "city-zaer-vassel.html", "info": "Astro: Sadalsuud"}, {"id": "city-nakahi", "name": "Nakahi", "type": "city", "x": 24.72, "y": 70.44, "href": "city-nakahi.html", "info": "Astro: Ras Alhague"}, {"id": "city-kyklora", "name": "Kyklora", "type": "city", "x": 44.59, "y": 70.78, "href": "city-kyklora.html", "info": "Astro: Antares"}, {"id": "city-eutomia", "name": "Eutomia", "type": "city", "x": 40.69, "y": 88.13, "href": "city-eutomia.html", "info": "Astro: Lanx"}, {"id": "city-lingra", "name": "Lingra", "type": "city", "x": 68.88, "y": 78.09, "href": "city-lingra.html", "info": "Astro: Deneb Algedi"}, {"id": "min-ossoborgo", "name": "Ossoborgo", "type": "minor-city", "x": 33.94, "y": 25.06}, {"id": "min-drekka", "name": "Drekka", "type": "minor-city", "x": 56, "y": 36}, {"id": "min-istid", "name": "Istid", "type": "minor-city", "x": 59.47, "y": 19.75}, {"id": "min-gleymoal", "name": "Gleymoal", "type": "minor-city", "x": 69.16, "y": 16.22}, {"id": "min-iridan", "name": "Iridan", "type": "minor-city", "x": 69.75, "y": 30.9}, {"id": "min-sarir", "name": "Sarir", "type": "minor-city", "x": 36, "y": 47}, {"id": "min-capo-stregato", "name": "Capo Stregato", "type": "minor-city", "x": 11.19, "y": 41.91}, {"id": "min-capo-ventura", "name": "Capo Ventura", "type": "minor-city", "x": 12.84, "y": 44.6}, {"id": "min-illan-dur", "name": "Illan-dur", "type": "minor-city", "x": 18, "y": 35}, {"id": "min-athassa", "name": "Atha'ssa", "type": "minor-city", "x": 12.41, "y": 51.69}, {"id": "min-giardino-dorato", "name": "Giardino Dorato", "type": "minor-city", "x": 13.41, "y": 38.53}, {"id": "min-istix", "name": "Istix", "type": "minor-city", "x": 20.72, "y": 66.5}, {"id": "min-murat-alhara", "name": "Murat Alhara", "type": "minor-city", "x": 38, "y": 51}, {"id": "min-castello-cn", "name": "Castello del Cielo Notturno", "type": "minor-city", "x": 38.22, "y": 62.06}, {"id": "min-valoria", "name": "Valoria", "type": "minor-city", "x": 52.19, "y": 53.72}, {"id": "min-aftica", "name": "Aftica", "type": "minor-city", "x": 57.84, "y": 65.09}, {"id": "min-stavrod", "name": "Stavrod", "type": "minor-city", "x": 38, "y": 70}, {"id": "min-ryn-gara", "name": "Ryn Gara", "type": "minor-city", "x": 46.72, "y": 87.66}, {"id": "min-limbo", "name": "Limbo", "type": "isle", "x": 45.44, "y": 81.22}, {"id": "min-naumacos", "name": "Naumacos", "type": "minor-city", "x": 75.72, "y": 72.75}, {"id": "min-archeodaxa", "name": "Montagna di Archeodaxa", "type": "mountain", "x": 72.84, "y": 70.81}, {"id": "feat-lago-rosso", "name": "Lago Rosso", "type": "lake", "x": 21.22, "y": 23.78}, {"id": "feat-dhaahr", "name": "il Dhaahr", "type": "region", "x": 30, "y": 35}, {"id": "feat-umihebinosy", "name": "Umihebinosy", "type": "region", "x": 53.75, "y": 45.19}, {"id": "feat-altin-qusaq", "name": "Altin Qusaq", "type": "region", "x": 68.28, "y": 81.62}, {"id": "feat-mare-stretto", "name": "Mare Stretto", "type": "sea", "x": 52.38, "y": 60.22}, {"id": "feat-mare-syllian", "name": "Mare di Syllian", "type": "sea", "x": 68.13, "y": 37.91}, {"id": "feat-golfo-istid", "name": "Golfo di Istid", "type": "sea", "x": 65.47, "y": 22.69}, {"id": "feat-golfo-fatvo", "name": "Golfo Fatvo", "type": "sea", "x": 52.03, "y": 82.34}, {"id": "feat-baia-naumacos", "name": "Baia di Naumacos", "type": "sea", "x": 79.91, "y": 76.22}];
 const W = 100, H = 100;
 const map = L.map('vastria-map', { crs: L.CRS.Simple, minZoom: -3, maxZoom: 5, zoomSnap: 0.25, zoomDelta: 0.5, scrollWheelZoom: true, doubleClickZoom: true, touchZoom: true, zoomControl: true, attributionControl: false, wheelPxPerZoomLevel: 80 });
@@ -115,38 +146,65 @@ const bounds = [[0, 0], [H, W]];
 L.imageOverlay('mappe/vastria.jpg', bounds).addTo(map);
 map.fitBounds(bounds, {padding: [20, 20]});
 map.setMaxBounds([[-30, -30], [H+30, W+30]]);
-
 function ll(x, y) { return [H - y, x]; }
 function fromLL(latlng) { return { x: +(latlng.lng).toFixed(2), y: +(H - latlng.lat).toFixed(2) }; }
 
+// Default colors per type
+const DEFAULT_COLORS = { 'city': '#e9c97f', 'minor-city': '#f0e8d8', 'isle': '#8fc8d8', 'mountain': '#b4aa9e', 'region': '#e9c97f', 'sea': '#5fa8c8', 'lake': '#ff8a7a' };
+const DEFAULT_SIZE = { 'city': 1.05, 'minor-city': 0.78, 'isle': 0.78, 'mountain': 0.76, 'region': 0.92, 'sea': 1.0, 'lake': 0.85 };
+
 let labels = JSON.parse(JSON.stringify(initialLabels));
-const saved = localStorage.getItem('vastria-coords-v3');
+labels.forEach(l => {
+  l.color = l.color || DEFAULT_COLORS[l.type];
+  l.fontSize = l.fontSize || DEFAULT_SIZE[l.type];
+  l.displayName = l.displayName || l.name;
+});
+const saved = localStorage.getItem('vastria-coords-v4');
 if (saved) {
   try {
     const obj = JSON.parse(saved);
-    labels.forEach(l => { if (obj[l.id]) { l.x = obj[l.id].x; l.y = obj[l.id].y; } });
+    labels.forEach(l => { if (obj[l.id]) Object.assign(l, obj[l.id]); });
   } catch (e) {}
 }
 
 const markers = {};
+let selected = null;
+
 function makeIcon(l) {
+  const color = l.color || DEFAULT_COLORS[l.type];
+  const size = l.fontSize || DEFAULT_SIZE[l.type];
+  const dn = l.displayName || l.name;
   let inner;
   if (l.type === 'city') {
-    inner = `<a class="lbl city clickable" href="${l.href}" title="${l.name} — ${l.info||''}"><span class="pin"></span>${l.name}</a>`;
+    inner = `<a class="lbl city clickable" href="${l.id}.html" title="${dn} — ${l.info||''}" style="color:${color};font-size:${size}rem"><span class="pin"></span>${dn}</a>`;
   } else if (l.type === 'minor-city' || l.type === 'isle' || l.type === 'mountain') {
-    inner = `<span class="lbl ${l.type}"><span class="pin"></span>${l.name}</span>`;
+    inner = `<a class="lbl ${l.type} clickable" href="${l.id}.html" title="${dn}" style="color:${color};font-size:${size}rem;text-decoration:none"><span class="pin"></span>${dn}</a>`;
   } else {
-    inner = `<span class="lbl ${l.type}">${l.name}</span>`;
+    inner = `<a class="lbl ${l.type} clickable" href="${l.id}.html" title="${dn}" style="color:${color};font-size:${size}rem;text-decoration:none">${dn}</a>`;
   }
-  const w = Math.max(60, l.name.length * 9);
-  return L.divIcon({ className: '', html: inner, iconSize: [w, 24], iconAnchor: [w/2, 12] });
+  const w = Math.max(60, dn.length * 9 * size);
+  return L.divIcon({ className: '', html: inner, iconSize: [w, 30 * size], iconAnchor: [w/2, 15 * size] });
+}
+
+function refreshMarker(l) {
+  const m = markers[l.id];
+  if (!m) return;
+  m.setIcon(makeIcon(l));
+  m.setLatLng(ll(l.x, l.y));
+  // Re-attach drag handlers (since icon was replaced, handler still bound to marker — OK)
 }
 
 labels.forEach(l => {
   const m = L.marker(ll(l.x, l.y), { icon: makeIcon(l), draggable: false, riseOnHover: true, interactive: true }).addTo(map);
-  if (l.type === 'city') m.bindPopup(`<h3>${l.name}</h3><span class="info">${l.info||''}</span><a class="btn" href="${l.href}">Apri scheda →</a>`);
+  if (l.type === 'city') m.bindPopup(`<h3>${l.displayName||l.name}</h3><span class="info">${l.info||''}</span><a class="btn" href="${l.id}.html">Apri scheda →</a>`);
   m.on('drag', () => { const p = fromLL(m.getLatLng()); l.x = p.x; l.y = p.y; refreshPanel(); });
   m.on('dragend', () => persist());
+  m.on('click', (e) => {
+    if (document.body.classList.contains('editmode')) {
+      L.DomEvent.stop(e);
+      selectLabel(l);
+    }
+  });
   markers[l.id] = m;
 });
 
@@ -157,48 +215,91 @@ const list = document.getElementById('coord-list');
 const jsonOut = document.getElementById('json-out');
 const status = document.getElementById('copy-status');
 const filterInp = document.getElementById('filter');
+const selEdit = document.getElementById('sel-edit');
+const selName = document.getElementById('sel-name');
+const selText = document.getElementById('sel-text');
+const selColor = document.getElementById('sel-color');
+const selColorVal = document.getElementById('sel-color-val');
+const selSize = document.getElementById('sel-size');
+const selSizeVal = document.getElementById('sel-size-val');
+const selPos = document.getElementById('sel-pos');
 
-editBtn.addEventListener('click', () => {
-  const on = !document.body.classList.contains('editmode');
+editBtn.addEventListener('click', async () => {
+  const isOn = document.body.classList.contains('editmode');
+  if (!isOn) {
+    const ok = await checkPwd();
+    if (!ok) return;
+  }
+  const on = !isOn;
   document.body.classList.toggle('editmode', on);
   editBtn.classList.toggle('active', on);
-  editBtn.textContent = on ? '✓ Edit ON' : '✏️ Edit';
+  editBtn.classList.toggle('locked', !on);
+  editBtn.textContent = on ? '✓ Edit ON' : 'Edit';
   Object.values(markers).forEach(m => { if (on) m.dragging.enable(); else m.dragging.disable(); });
   if (on) refreshPanel();
+  else { selected = null; selEdit.style.display = 'none'; document.querySelectorAll('.lbl').forEach(el => el.classList.remove('selected')); }
 });
 
 document.getElementById('btn-fit').addEventListener('click', () => map.fitBounds(bounds, {padding: [20, 20]}));
 
-const TYPE_GROUP = { city: 'Città principali (15)', 'minor-city': 'Località minori', isle: 'Isole', mountain: 'Montagne', region: 'Regioni', sea: 'Mari/golfi', lake: 'Laghi' };
+function selectLabel(l) {
+  selected = l;
+  document.querySelectorAll('.lbl').forEach(el => el.classList.remove('selected'));
+  const m = markers[l.id];
+  const el = m.getElement()?.querySelector('.lbl');
+  if (el) el.classList.add('selected');
+  selEdit.style.display = 'block';
+  selName.textContent = l.name + ' [' + l.type + ']';
+  selText.value = l.displayName;
+  selColor.value = l.color;
+  selColorVal.textContent = l.color;
+  selSize.value = l.fontSize;
+  selSizeVal.textContent = l.fontSize.toFixed(2) + 'rem';
+  selPos.textContent = `x=${l.x.toFixed(1)}, y=${l.y.toFixed(1)}`;
+}
+
+selText.addEventListener('input', () => { if (!selected) return; selected.displayName = selText.value; refreshMarker(selected); refreshPanel(); persist(); });
+selColor.addEventListener('input', () => { if (!selected) return; selected.color = selColor.value; selColorVal.textContent = selColor.value; refreshMarker(selected); persist(); });
+selSize.addEventListener('input', () => { if (!selected) return; selected.fontSize = parseFloat(selSize.value); selSizeVal.textContent = selected.fontSize.toFixed(2) + 'rem'; refreshMarker(selected); persist(); });
+document.getElementById('sel-reset').addEventListener('click', () => {
+  if (!selected) return;
+  const i = initialLabels.find(x => x.id === selected.id);
+  selected.x = i.x; selected.y = i.y;
+  selected.color = DEFAULT_COLORS[selected.type];
+  selected.fontSize = DEFAULT_SIZE[selected.type];
+  selected.displayName = selected.name;
+  refreshMarker(selected);
+  selectLabel(selected);
+  refreshPanel(); persist();
+});
+document.getElementById('sel-close').addEventListener('click', () => { selected = null; selEdit.style.display = 'none'; document.querySelectorAll('.lbl').forEach(el => el.classList.remove('selected')); });
+
+const TYPE_GROUP = { city: 'Città principali', 'minor-city': 'Località minori', isle: 'Isole', mountain: 'Montagne', region: 'Regioni', sea: 'Mari/golfi', lake: 'Laghi' };
 const TYPE_ORDER = ['city', 'minor-city', 'isle', 'mountain', 'region', 'sea', 'lake'];
 
 function refreshPanel() {
   const flt = filterInp.value.toLowerCase();
   list.innerHTML = '';
   TYPE_ORDER.forEach(t => {
-    const group = labels.filter(l => l.type === t && l.name.toLowerCase().includes(flt));
+    const group = labels.filter(l => l.type === t && (l.name.toLowerCase().includes(flt) || l.displayName.toLowerCase().includes(flt)));
     if (group.length === 0) return;
-    const gh = document.createElement('div');
-    gh.className = 'row group-title';
-    gh.textContent = `── ${TYPE_GROUP[t]} (${group.length})`;
-    list.appendChild(gh);
+    const gh = document.createElement('div'); gh.className = 'row group-title'; gh.textContent = `── ${TYPE_GROUP[t]} (${group.length})`; list.appendChild(gh);
     group.forEach(l => {
       const init = initialLabels.find(x => x.id === l.id);
-      const dirty = (init.x !== l.x || init.y !== l.y);
-      const r = document.createElement('div');
-      r.className = 'row' + (dirty ? ' dirty' : '');
-      r.innerHTML = `<b>${l.name}</b>: ${l.x.toFixed(1)}, ${l.y.toFixed(1)}` + (dirty ? ` <small>(era ${init.x}, ${init.y})</small>` : '');
+      const dirty = (init.x !== l.x || init.y !== l.y || (l.displayName !== l.name) || (l.color !== DEFAULT_COLORS[l.type]) || (l.fontSize !== DEFAULT_SIZE[l.type]));
+      const r = document.createElement('div'); r.className = 'row' + (dirty ? ' dirty' : '');
+      r.innerHTML = `<b>${l.displayName||l.name}</b>: ${l.x.toFixed(1)}, ${l.y.toFixed(1)}`;
+      r.addEventListener('click', () => selectLabel(l));
       list.appendChild(r);
     });
   });
-  jsonOut.value = JSON.stringify(labels.map(l => ({ id: l.id, name: l.name, type: l.type, x: l.x, y: l.y })), null, 2);
+  jsonOut.value = JSON.stringify(labels.map(l => ({ id: l.id, name: l.name, displayName: l.displayName, type: l.type, x: l.x, y: l.y, color: l.color, fontSize: l.fontSize })), null, 2);
 }
-
 filterInp.addEventListener('input', refreshPanel);
 
 function persist() {
-  const obj = {}; labels.forEach(l => obj[l.id] = { x: l.x, y: l.y });
-  localStorage.setItem('vastria-coords-v3', JSON.stringify(obj));
+  const obj = {}; labels.forEach(l => obj[l.id] = { x: l.x, y: l.y, color: l.color, fontSize: l.fontSize, displayName: l.displayName });
+  localStorage.setItem('vastria-coords-v4', JSON.stringify(obj));
   status.textContent = '💾 Salvato ' + new Date().toLocaleTimeString();
   setTimeout(() => status.textContent = '', 3000);
 }
@@ -207,13 +308,16 @@ document.getElementById('btn-copy').addEventListener('click', async () => {
   try { await navigator.clipboard.writeText(jsonOut.value); status.textContent = '✓ JSON copiato — incolla in chat per fissare'; setTimeout(() => status.textContent = '', 5000); }
   catch (e) { jsonOut.select(); document.execCommand('copy'); }
 });
-
 document.getElementById('btn-save').addEventListener('click', persist);
-
 document.getElementById('btn-reset-coords').addEventListener('click', () => {
-  if (!confirm('Ripristinare le posizioni di default?')) return;
-  localStorage.removeItem('vastria-coords-v3');
-  labels.forEach(l => { const i = initialLabels.find(x => x.id === l.id); l.x = i.x; l.y = i.y; markers[l.id].setLatLng(ll(l.x, l.y)); });
+  if (!confirm('Reset di TUTTE le label (posizioni, colori, dimensioni, nomi)?')) return;
+  localStorage.removeItem('vastria-coords-v4');
+  labels.forEach(l => {
+    const i = initialLabels.find(x => x.id === l.id);
+    Object.assign(l, i);
+    l.color = DEFAULT_COLORS[l.type]; l.fontSize = DEFAULT_SIZE[l.type]; l.displayName = l.name;
+    refreshMarker(l);
+  });
   refreshPanel();
 });
 
