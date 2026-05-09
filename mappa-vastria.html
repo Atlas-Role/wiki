@@ -76,6 +76,12 @@
   .panel-buttons button.danger { border-color: rgba(255,107,107,.4); color: #ff8a7a; }
   #copy-status { font-size: .78rem; color: var(--gold); margin-top: 4px; min-height: 1em; }
   .panel-filter input { width: 100%; padding: 5px 8px; background: rgba(6,16,31,.5); border: 1px solid rgba(95,213,232,.2); color: var(--paper); border-radius: 4px; font-size: .78rem; margin-bottom: 6px; }
+
+@keyframes pulse-focus {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.25); }
+}
+
 </style>
 </head>
 <body>
@@ -322,6 +328,30 @@ document.getElementById('btn-reset-coords').addEventListener('click', () => {
 });
 
 refreshPanel();
+
+// === Focus su query string ?focus=ID ===
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  const focusId = params.get('focus');
+  if (!focusId) return;
+  const target = labels.find(l => l.id === focusId);
+  if (!target) return;
+  setTimeout(() => {
+    const m = markers[focusId];
+    if (!m) return;
+    map.flyTo(ll(target.x, target.y), 2, { duration: 1.2 });
+    setTimeout(() => {
+      const el = m.getElement()?.querySelector('.lbl');
+      if (el) {
+        el.style.animation = 'pulse-focus 1.2s ease 3';
+        el.style.outline = '3px solid #ffd76b';
+        el.style.outlineOffset = '4px';
+      }
+      if (target.type === 'city') m.openPopup();
+    }, 1300);
+  }, 200);
+})();
+
 </script>
 </body>
 </html>

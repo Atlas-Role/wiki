@@ -962,3 +962,33 @@ a.cta-mappa .cta-mappa-sub {
   a.cta-mappa .cta-mappa-title { font-size: 1.1rem !important; }
   a.cta-mappa .cta-mappa-icon { font-size: 1.5rem !important; }
 }
+
+
+/* === v8: Map banner — link diretto alla mappa con focus === */
+.map-banner {
+  margin: 12px 0 20px;
+}
+.map-banner a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 18px;
+  background: linear-gradient(135deg, rgba(95,213,232,.12), rgba(233,201,127,.08));
+  border: 1px solid rgba(95,213,232,.3);
+  border-left: 4px solid var(--cyan-bright);
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--paper);
+  transition: all .25s ease;
+}
+.map-banner a:hover {
+  border-color: var(--gold);
+  border-left-color: var(--gold);
+  background: linear-gradient(135deg, rgba(233,201,127,.15), rgba(95,213,232,.08));
+  transform: translateX(4px);
+}
+.map-banner .map-icon { font-size: 1.6rem; line-height: 1; filter: drop-shadow(0 0 4px var(--cyan-bright)); }
+.map-banner .map-text { display: flex; flex-direction: column; gap: 2px; }
+.map-banner .map-text b { font-family: 'Playfair Display', serif; font-style: italic; font-weight: 500; font-size: 1.05rem; color: var(--cyan-bright); }
+.map-banner a:hover .map-text b { color: var(--gold); }
+.map-banner .map-text small { font-size: .76rem; color: rgba(240,232,216,.6); letter-spacing: .04em; }
