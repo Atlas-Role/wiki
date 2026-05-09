@@ -10,84 +10,92 @@
 <style>
   body { margin: 0; padding: 0; }
   .map-page { display: flex; flex-direction: column; height: 100vh; }
-  .map-header { padding: 12px 24px 8px; background: var(--night-deep); border-bottom: 1px solid rgba(95,213,232,.18); display:flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
-  .map-header h1 { margin: 0; font-family: 'Playfair Display', serif; font-style: italic; font-weight: 400; font-size: 1.4rem; color: var(--paper); }
-  .map-header p { margin: 4px 0 0; color: rgba(240,232,216,.7); font-size: .85rem; flex-basis: 100%; }
+  .map-header { padding: 10px 24px; background: var(--night-deep); border-bottom: 1px solid rgba(95,213,232,.18); display:flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+  .map-header h1 { margin: 0; font-family: 'Playfair Display', serif; font-style: italic; font-weight: 400; font-size: 1.3rem; color: var(--paper); }
+  .map-header p { margin: 4px 0 0; color: rgba(240,232,216,.7); font-size: .82rem; flex-basis: 100%; }
   .header-controls { display: flex; gap: 8px; }
-  .btn-edit, .btn-secondary {
-    padding: 7px 14px; border-radius: 6px; cursor: pointer; font-size: .85rem;
-    background: rgba(95,213,232,.12); color: var(--cyan-bright); border: 1px solid rgba(95,213,232,.4);
-    font-family: 'Inter', system-ui, sans-serif;
-  }
+  .btn-edit, .btn-secondary { padding: 7px 14px; border-radius: 6px; cursor: pointer; font-size: .85rem; background: rgba(95,213,232,.12); color: var(--cyan-bright); border: 1px solid rgba(95,213,232,.4); font-family: 'Inter', system-ui, sans-serif; }
   .btn-edit:hover { background: rgba(95,213,232,.22); }
-  .btn-edit.active { background: var(--gold); color: var(--night-deep); border-color: var(--gold); font-weight: 600; }
+  .btn-edit.active { background: #ffd76b; color: var(--night-deep); border-color: #ffd76b; font-weight: 600; }
   .btn-secondary { background: transparent; color: rgba(240,232,216,.7); border-color: rgba(240,232,216,.3); }
-  .btn-secondary:hover { color: var(--paper); border-color: var(--paper); }
-  #vastria-map { flex: 1; background: #06101f; }
-  .leaflet-container { background: #06101f !important; }
-  .city-marker {
-    cursor: pointer; color: var(--gold);
+  #vastria-map { flex: 1; background: #06101f; position: relative; }
+  .leaflet-container { background: #06101f !important; cursor: grab; }
+  .leaflet-container.leaflet-grab { cursor: grab; }
+  .leaflet-container.leaflet-dragging { cursor: grabbing; }
+
+  /* CRITICAL FIX: pointer-events su container marker */
+  .leaflet-marker-icon { pointer-events: none !important; background: transparent !important; border: none !important; }
+  body.editmode .leaflet-marker-icon { pointer-events: auto !important; cursor: move !important; }
+  /* In view mode, riattiva click sui link cliccabili (città) */
+  body:not(.editmode) .leaflet-marker-icon .clickable { pointer-events: auto; }
+
+  /* === City labels (15 principali) === */
+  .lbl {
+    text-align: center;
+    white-space: nowrap;
     text-shadow: 0 0 6px #000, 0 0 12px #000, 0 1px 2px #000;
-    font-family: 'Playfair Display', serif; font-style: italic;
-    font-size: 1.05rem; font-weight: 600; text-align: center;
-    white-space: nowrap; pointer-events: auto; text-decoration: none;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
   }
-  .city-marker:hover { color: var(--cyan-bright); }
-  .city-marker .pin {
+  .lbl.city {
+    color: var(--gold); font-size: 1.05rem; font-weight: 600;
+  }
+  .lbl.city .pin {
     display: block; width: 12px; height: 12px; margin: 0 auto 2px;
     background: var(--gold); border: 2px solid #fff; border-radius: 50%;
     box-shadow: 0 0 8px var(--gold), 0 0 16px rgba(233,201,127,.5);
   }
-  .city-marker:hover .pin { background: var(--cyan-bright); box-shadow: 0 0 8px var(--cyan-bright); }
-  body.editmode .city-marker { cursor: move !important; color: #ffd76b; }
-  body.editmode .city-marker .pin { background: #ffd76b; border-color: #ff6b6b; box-shadow: 0 0 12px #ff6b6b, 0 0 24px rgba(255,107,107,.6); }
-  .minor-label {
-    color: rgba(240,232,216,.85); text-shadow: 0 0 4px #000, 0 0 8px #000;
-    font-family: 'Inter', system-ui, sans-serif; font-size: .72rem;
-    font-style: italic; text-align: center; white-space: nowrap; pointer-events: none;
-  }
-  .minor-label.region { color: rgba(233,201,127,.7); font-size: .82rem; letter-spacing: .12em; text-transform: uppercase; }
-  .minor-label.sea { color: rgba(95,213,232,.6); font-size: .9rem; letter-spacing: .12em; }
-  .minor-label.lake { color: rgba(255,138,122,.7); font-size: .78rem; }
-  .minor-label .pin-small { display: inline-block; width: 5px; height: 5px; background: rgba(240,232,216,.5); border-radius: 50%; margin-right: 3px; vertical-align: middle; }
+  .lbl.city.clickable:hover { color: var(--cyan-bright); }
+  .lbl.city.clickable:hover .pin { background: var(--cyan-bright); box-shadow: 0 0 8px var(--cyan-bright); }
+  .lbl.city a { color: inherit; text-decoration: none; }
+
+  .lbl.minor-city { color: rgba(240,232,216,.85); font-style: italic; font-family: 'Inter', system-ui, sans-serif; font-size: .78rem; }
+  .lbl.minor-city .pin { display: inline-block; width: 5px; height: 5px; background: rgba(240,232,216,.6); border-radius: 50%; margin-right: 3px; vertical-align: middle; border: 1px solid #fff; }
+
+  .lbl.isle { color: rgba(143,200,216,.85); font-style: italic; font-size: .78rem; font-family: 'Inter', system-ui, sans-serif; }
+  .lbl.isle .pin { display: inline-block; width: 5px; height: 5px; background: rgba(143,200,216,.6); border-radius: 50%; margin-right: 3px; vertical-align: middle; }
+
+  .lbl.mountain { color: rgba(180,170,160,.8); font-style: italic; font-size: .76rem; font-family: 'Inter', system-ui, sans-serif; }
+  .lbl.region { color: rgba(233,201,127,.7); font-size: .92rem; letter-spacing: .14em; text-transform: uppercase; font-style: normal; font-family: 'Playfair Display', serif; }
+  .lbl.sea { color: rgba(95,213,232,.7); font-size: 1rem; letter-spacing: .14em; font-style: italic; font-family: 'Playfair Display', serif; }
+  .lbl.lake { color: rgba(255,138,122,.75); font-style: italic; font-size: .85rem; font-family: 'Playfair Display', serif; }
+
+  /* edit mode: tutti i label evidenziati con outline rossa */
+  body.editmode .lbl { outline: 1px dashed rgba(255,107,107,.6); outline-offset: 2px; }
+  body.editmode .lbl:hover { outline-color: #ffd76b; outline-style: solid; }
+
+  /* popups */
   .leaflet-popup-content-wrapper { background: var(--night); color: var(--paper); border: 1px solid rgba(95,213,232,.3); }
   .leaflet-popup-tip { background: var(--night); }
-  .leaflet-popup-content h3 { font-family: 'Playfair Display', serif; font-style: italic; color: var(--cyan-bright); margin: 0 0 4px; font-weight: 400; font-size: 1.15rem; }
-  .leaflet-popup-content .astro { display: block; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
-  .leaflet-popup-content .desc { margin: 0 0 8px; font-size: .9rem; }
+  .leaflet-popup-content h3 { font-family: 'Playfair Display', serif; font-style: italic; color: var(--cyan-bright); margin: 0 0 4px; font-weight: 400; }
+  .leaflet-popup-content .info { display: block; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
   .leaflet-popup-content a.btn { display: inline-block; padding: 4px 10px; background: rgba(95,213,232,.15); color: var(--cyan-bright); border: 1px solid rgba(95,213,232,.4); border-radius: 4px; text-decoration: none; font-size: .85rem; }
-  .leaflet-popup-content a.btn:hover { background: rgba(95,213,232,.25); }
-  .map-legend { position: absolute; bottom: 16px; left: 16px; z-index: 1000; background: rgba(6,16,31,.85); border: 1px solid rgba(95,213,232,.3); border-radius: 8px; padding: 12px 16px; font-size: .82rem; color: var(--paper); backdrop-filter: blur(6px); }
-  .map-legend h4 { margin: 0 0 6px; font-family: 'Playfair Display', serif; font-style: italic; color: var(--cyan-bright); font-weight: 400; }
-  .map-legend .row { display: flex; align-items: center; gap: 6px; margin: 3px 0; }
+
+  .map-legend { position: absolute; bottom: 16px; left: 16px; z-index: 999; background: rgba(6,16,31,.85); border: 1px solid rgba(95,213,232,.3); border-radius: 8px; padding: 10px 14px; font-size: .8rem; color: var(--paper); backdrop-filter: blur(6px); }
+  .map-legend h4 { margin: 0 0 4px; font-family: 'Playfair Display', serif; font-style: italic; color: var(--cyan-bright); font-weight: 400; }
+  .map-legend .row { display: flex; align-items: center; gap: 6px; margin: 2px 0; }
   .map-legend .swatch { width: 10px; height: 10px; border-radius: 50%; }
-  .map-legend .swatch.gold { background: var(--gold); border: 1px solid #fff; }
-  .map-legend .swatch.silver { background: rgba(240,232,216,.5); }
-  .map-legend .swatch.edit { background: #ffd76b; border: 1px solid #ff6b6b; }
-  .leaflet-control-zoom a { background: var(--night) !important; color: var(--cyan-bright) !important; border-color: rgba(95,213,232,.3) !important; }
+
+  .leaflet-control-zoom a { background: var(--night) !important; color: var(--cyan-bright) !important; border-color: rgba(95,213,232,.3) !important; font-size: 18px !important; }
   .leaflet-control-zoom a:hover { background: rgba(95,213,232,.15) !important; }
 
-  /* Edit panel */
-  #edit-panel {
-    position: absolute; top: 16px; right: 16px; z-index: 1000;
-    width: 360px; max-height: calc(100vh - 100px);
-    background: rgba(6,16,31,.95); border: 1px solid rgba(255,107,107,.4);
-    border-radius: 10px; padding: 14px; backdrop-filter: blur(8px);
-    color: var(--paper); display: none; flex-direction: column;
-  }
+  /* edit panel */
+  #edit-panel { position: absolute; top: 16px; right: 16px; z-index: 1000; width: 380px; max-height: calc(100vh - 130px); background: rgba(6,16,31,.95); border: 1px solid rgba(255,107,107,.4); border-radius: 10px; padding: 14px; backdrop-filter: blur(8px); color: var(--paper); display: none; flex-direction: column; }
   body.editmode #edit-panel { display: flex; }
   #edit-panel h3 { margin: 0 0 8px; font-family: 'Playfair Display', serif; font-style: italic; color: #ffd76b; font-weight: 400; }
-  #edit-panel .hint { font-size: .82rem; color: rgba(240,232,216,.75); margin-bottom: 10px; }
-  #coord-list { flex: 1; overflow-y: auto; font-family: ui-monospace, 'SF Mono', monospace; font-size: .75rem; background: rgba(6,16,31,.6); border: 1px solid rgba(95,213,232,.18); border-radius: 6px; padding: 8px; margin-bottom: 8px; max-height: 50vh; }
-  #coord-list .row { padding: 3px 0; border-bottom: 1px dotted rgba(95,213,232,.1); }
-  #coord-list .row.dirty { color: #ffd76b; }
+  #edit-panel .hint { font-size: .8rem; color: rgba(240,232,216,.75); margin-bottom: 10px; }
+  #coord-list { flex: 1; overflow-y: auto; font-family: ui-monospace, 'SF Mono', monospace; font-size: .72rem; background: rgba(6,16,31,.6); border: 1px solid rgba(95,213,232,.18); border-radius: 6px; padding: 8px; margin-bottom: 8px; max-height: 45vh; }
+  #coord-list .row { padding: 2px 0; border-bottom: 1px dotted rgba(95,213,232,.08); }
+  #coord-list .row.dirty { color: #ffd76b; font-weight: 500; }
   #coord-list .row b { color: var(--cyan-bright); }
-  #json-out { width: 100%; min-height: 100px; max-height: 200px; background: rgba(6,16,31,.6); border: 1px solid rgba(95,213,232,.2); border-radius: 6px; color: var(--paper); padding: 8px; font-family: ui-monospace, monospace; font-size: .72rem; resize: vertical; }
+  #coord-list .group-title { color: var(--gold); font-weight: 600; padding-top: 6px; padding-bottom: 4px; font-style: italic; }
+  #json-out { width: 100%; min-height: 80px; max-height: 180px; background: rgba(6,16,31,.6); border: 1px solid rgba(95,213,232,.2); border-radius: 6px; color: var(--paper); padding: 8px; font-family: ui-monospace, monospace; font-size: .7rem; resize: vertical; }
   .panel-buttons { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
   .panel-buttons button { flex: 1; padding: 6px 10px; border-radius: 5px; cursor: pointer; font-size: .78rem; border: 1px solid rgba(95,213,232,.4); background: rgba(95,213,232,.1); color: var(--cyan-bright); }
-  .panel-buttons button.danger { border-color: rgba(255,107,107,.4); color: #ff8a7a; background: rgba(255,107,107,.05); }
-  .panel-buttons button:hover { background: rgba(95,213,232,.2); }
+  .panel-buttons button.danger { border-color: rgba(255,107,107,.4); color: #ff8a7a; }
   #copy-status { font-size: .78rem; color: var(--gold); margin-top: 4px; min-height: 1em; }
+  .panel-filter { margin-bottom: 8px; }
+  .panel-filter input { width: 100%; padding: 5px 8px; background: rgba(6,16,31,.5); border: 1px solid rgba(95,213,232,.2); color: var(--paper); border-radius: 4px; font-size: .78rem; }
 </style>
 </head>
 <body>
@@ -96,163 +104,177 @@
 <div class="map-header">
 <div>
 <h1>Vastria — Mappa interattiva</h1>
-<p>Trascina per panare, rotella per zoom. Clic sui pin <b style="color:var(--gold)">oro</b> per aprire le pagine entità. <b style="color:#ffd76b">Modalità edit</b> abilita il drag dei pin.</p>
+<p>Trascina per panare · rotella o pulsanti +/− per zoom · clicca pin <b style="color:var(--gold)">oro</b> per pagina entità · <b style="color:#ffd76b">edit mode</b> per spostare TUTTE le label</p>
 </div>
 <div class="header-controls">
 <button class="btn-edit" id="toggle-edit">✏️ Modalità edit</button>
-<button class="btn-secondary" id="btn-reset">↺ Reset</button>
+<button class="btn-secondary" id="btn-fit">⛶ Fit</button>
 </div>
 </div>
 <div id="vastria-map"></div>
 <div class="map-legend">
 <h4>Legenda</h4>
-<div class="row"><span class="swatch gold"></span> 15 città principali (cliccabili)</div>
-<div class="row"><span class="swatch silver"></span> Località minori (label)</div>
-<div class="row"><span class="swatch edit"></span> Edit ON: trascinabili</div>
+<div class="row"><span class="swatch" style="background:var(--gold);border:1px solid #fff"></span> 15 città principali (cliccabili)</div>
+<div class="row"><span class="swatch" style="background:rgba(240,232,216,.6)"></span> Località minori</div>
+<div class="row"><span style="color:rgba(95,213,232,.7);font-style:italic">Mari</span> · <span style="color:rgba(233,201,127,.7);text-transform:uppercase;font-size:.8em">Regioni</span></div>
+<div class="row" style="margin-top:4px;font-size:.72rem;color:rgba(240,232,216,.6)">Edit ON: tutti draggable</div>
 </div>
 
 <div id="edit-panel">
-<h3>✏️ Modalità Edit</h3>
-<div class="hint">Trascina i pin sulla posizione corretta. Quando sei contento, copia il JSON e incollamelo in chat — io fisso le coordinate per sempre.</div>
+<h3>✏️ Edit · 45 label</h3>
+<div class="hint">Trascina QUALSIASI label (anche mari, regioni, città minori). Salvataggio automatico nel browser. Quando contento: <b>Copia JSON</b> → incollalo in chat.</div>
+<div class="panel-filter"><input type="text" id="filter" placeholder="Filtra label per nome…"></div>
 <div id="coord-list"></div>
 <textarea id="json-out" readonly></textarea>
 <div class="panel-buttons">
 <button id="btn-copy">📋 Copia JSON</button>
-<button id="btn-save">💾 Salva nel browser</button>
-<button id="btn-reset-coords" class="danger">↺ Ripristina</button>
+<button id="btn-save">💾 Salva</button>
+<button id="btn-reset-coords" class="danger">↺ Ripristina tutto</button>
 </div>
 <div id="copy-status"></div>
 </div>
 </div>
-<footer class="atlas-footer"><div>Atlas Wiki · Vastria · <a href="https://www.atlasrole.com" target="_blank" rel="noopener">atlasrole.com</a></div><div class="meta">Generato il 09 May 2026 · Mappa interattiva · modalità edit attivabile</div></footer>
+<footer class="atlas-footer"><div>Atlas Wiki · Vastria</div><div class="meta">Generato il 09 May 2026 · Mappa interattiva · 45 label · edit mode</div></footer>
 
 <script>
-const initialCities = [{"name": "Paistos", "astro": "Al Tarf", "href": "city-paistos.html", "x": 50, "y": 35, "desc": "Astro: Al Tarf · Sangue ed emomanzia"}, {"name": "Turasar", "astro": "Tordek", "href": "city-turasar.html", "x": 34, "y": 32, "desc": "Astro: Tordek · Regno nanico delle Montagne di Vetro"}, {"name": "Damya", "astro": "Spica", "href": "city-damya.html", "x": 38, "y": 41, "desc": "Astro: Spica · Mente, commercio, intrigo"}, {"name": "Mnemia", "astro": "Aldebaran", "href": "city-mnemia.html", "x": 47, "y": 22, "desc": "Astro: Aldebaran · Terra e memoria"}, {"name": "Velos", "astro": "Kaus", "href": "city-velos.html", "x": 50, "y": 32, "desc": "Astro: Kaus · Felicità e draghi"}, {"name": "Mizu", "astro": "Alrisha", "href": "city-mizu.html", "x": 49, "y": 39, "desc": "Astro: Alrisha · Acqua e legami"}, {"name": "Mizurin", "astro": "Alrisha (esuli)", "href": "city-mizurin.html", "x": 53, "y": 45, "desc": "Città fluviale fondata da esuli di Mizu"}, {"name": "Atua Rua", "astro": "Castore e Polluce", "href": "city-atua-rua.html", "x": 65, "y": 47, "desc": "Astro: Castore e Polluce · Anima duplice · sede di GDR1"}, {"name": "Ahi Koati", "astro": "Hamal", "href": "city-ahi-koati.html", "x": 60, "y": 32, "desc": "Astro: Hamal · Fuoco, isola del vulcano Tama Ali"}, {"name": "Xiphos", "astro": "Regolo", "href": "city-xiphos.html", "x": 67, "y": 62, "desc": "Astro: Regolo · Guerra e gloria"}, {"name": "Zaer'Vassel", "astro": "Sadalsuud", "href": "city-zaer-vassel.html", "x": 14, "y": 38, "desc": "Astro: Sadalsuud · Magia · sede di GDR25"}, {"name": "Nakahi", "astro": "Ras Alhague", "href": "city-nakahi.html", "x": 48, "y": 70, "desc": "Astro: Ras Alhague · Capitale degli avventurieri · Westmarch shared world"}, {"name": "Kyklora", "astro": "Antares", "href": "city-kyklora.html", "x": 35, "y": 78, "desc": "Astro: Antares · Natura"}, {"name": "Eutomia", "astro": "Lanx", "href": "city-eutomia.html", "x": 24, "y": 88, "desc": "Astro: Lanx · Aria, conoscenza, legge"}, {"name": "Lingra", "astro": "Deneb Algedi", "href": "city-lingra.html", "x": 51, "y": 89, "desc": "Astro: Deneb Algedi · Capitale dell'Impero"}];
-const minor = [{"name": "Lago Rosso", "x": 32, "y": 21, "kind": "lake"}, {"name": "Ossoborgo", "x": 39, "y": 32, "kind": "city"}, {"name": "Drekka", "x": 56, "y": 36, "kind": "city"}, {"name": "Istid", "x": 56, "y": 28, "kind": "city"}, {"name": "Gleymoal", "x": 84, "y": 28, "kind": "city"}, {"name": "Iridan", "x": 75, "y": 41, "kind": "city"}, {"name": "Sarir", "x": 36, "y": 47, "kind": "city"}, {"name": "il Dhaahr", "x": 30, "y": 35, "kind": "region"}, {"name": "Capo Stregato", "x": 19, "y": 30, "kind": "city"}, {"name": "Capo Ventura", "x": 21, "y": 32, "kind": "city"}, {"name": "Illan-dur", "x": 18, "y": 35, "kind": "city"}, {"name": "Atha'ssa", "x": 18, "y": 41, "kind": "city"}, {"name": "Giardino Dorato", "x": 23, "y": 26, "kind": "city"}, {"name": "Istix", "x": 41, "y": 64, "kind": "city"}, {"name": "Murat Alhara", "x": 38, "y": 51, "kind": "city"}, {"name": "Castello del Cielo Notturno", "x": 35, "y": 60, "kind": "city"}, {"name": "Valoria", "x": 47, "y": 53, "kind": "city"}, {"name": "Aftica", "x": 56, "y": 64, "kind": "city"}, {"name": "Stavrod", "x": 38, "y": 70, "kind": "city"}, {"name": "Ryn Gara", "x": 30, "y": 86, "kind": "city"}, {"name": "Limbo", "x": 30, "y": 80, "kind": "isle"}, {"name": "Naumacos", "x": 53, "y": 78, "kind": "city"}, {"name": "Montagna di Archeodaxa", "x": 46, "y": 75, "kind": "mountain"}, {"name": "Umihebinosy", "x": 49, "y": 43, "kind": "region"}, {"name": "Mare Stretto", "x": 44, "y": 60, "kind": "sea"}, {"name": "Mare di Syllian", "x": 75, "y": 31, "kind": "sea"}, {"name": "Golfo di Istid", "x": 71, "y": 22, "kind": "sea"}, {"name": "Golfo Fatvo", "x": 39, "y": 79, "kind": "sea"}, {"name": "Baia di Naumacos", "x": 60, "y": 81, "kind": "sea"}, {"name": "Altin Qusaq", "x": 45, "y": 88, "kind": "region"}];
-
+const initialLabels = [{"id": "city-paistos", "name": "Paistos", "type": "city", "href": "city-paistos.html", "x": 50, "y": 35, "info": "Astro: Al Tarf"}, {"id": "city-turasar", "name": "Turasar", "type": "city", "href": "city-turasar.html", "x": 34, "y": 32, "info": "Astro: Tordek"}, {"id": "city-damya", "name": "Damya", "type": "city", "href": "city-damya.html", "x": 38, "y": 41, "info": "Astro: Spica"}, {"id": "city-mnemia", "name": "Mnemia", "type": "city", "href": "city-mnemia.html", "x": 47, "y": 22, "info": "Astro: Aldebaran"}, {"id": "city-velos", "name": "Velos", "type": "city", "href": "city-velos.html", "x": 50, "y": 32, "info": "Astro: Kaus"}, {"id": "city-mizu", "name": "Mizu", "type": "city", "href": "city-mizu.html", "x": 49, "y": 39, "info": "Astro: Alrisha"}, {"id": "city-mizurin", "name": "Mizurin", "type": "city", "href": "city-mizurin.html", "x": 53, "y": 45, "info": "Esuli di Mizu"}, {"id": "city-atua-rua", "name": "Atua Rua", "type": "city", "href": "city-atua-rua.html", "x": 65, "y": 47, "info": "Astro: Castore e Polluce"}, {"id": "city-ahi-koati", "name": "Ahi Koati", "type": "city", "href": "city-ahi-koati.html", "x": 60, "y": 32, "info": "Astro: Hamal"}, {"id": "city-xiphos", "name": "Xiphos", "type": "city", "href": "city-xiphos.html", "x": 67, "y": 62, "info": "Astro: Regolo"}, {"id": "city-zaer-vassel", "name": "Zaer'Vassel", "type": "city", "href": "city-zaer-vassel.html", "x": 14, "y": 38, "info": "Astro: Sadalsuud"}, {"id": "city-nakahi", "name": "Nakahi", "type": "city", "href": "city-nakahi.html", "x": 48, "y": 70, "info": "Astro: Ras Alhague"}, {"id": "city-kyklora", "name": "Kyklora", "type": "city", "href": "city-kyklora.html", "x": 35, "y": 78, "info": "Astro: Antares"}, {"id": "city-eutomia", "name": "Eutomia", "type": "city", "href": "city-eutomia.html", "x": 24, "y": 88, "info": "Astro: Lanx"}, {"id": "city-lingra", "name": "Lingra", "type": "city", "href": "city-lingra.html", "x": 51, "y": 89, "info": "Astro: Deneb Algedi"}, {"id": "min-ossoborgo", "name": "Ossoborgo", "type": "minor-city", "x": 39, "y": 32}, {"id": "min-drekka", "name": "Drekka", "type": "minor-city", "x": 56, "y": 36}, {"id": "min-istid", "name": "Istid", "type": "minor-city", "x": 56, "y": 28}, {"id": "min-gleymoal", "name": "Gleymoal", "type": "minor-city", "x": 84, "y": 28}, {"id": "min-iridan", "name": "Iridan", "type": "minor-city", "x": 75, "y": 41}, {"id": "min-sarir", "name": "Sarir", "type": "minor-city", "x": 36, "y": 47}, {"id": "min-capo-stregato", "name": "Capo Stregato", "type": "minor-city", "x": 19, "y": 30}, {"id": "min-capo-ventura", "name": "Capo Ventura", "type": "minor-city", "x": 21, "y": 32}, {"id": "min-illan-dur", "name": "Illan-dur", "type": "minor-city", "x": 18, "y": 35}, {"id": "min-athassa", "name": "Atha'ssa", "type": "minor-city", "x": 18, "y": 41}, {"id": "min-giardino-dorato", "name": "Giardino Dorato", "type": "minor-city", "x": 23, "y": 26}, {"id": "min-istix", "name": "Istix", "type": "minor-city", "x": 41, "y": 64}, {"id": "min-murat-alhara", "name": "Murat Alhara", "type": "minor-city", "x": 38, "y": 51}, {"id": "min-castello-cn", "name": "Castello del Cielo Notturno", "type": "minor-city", "x": 35, "y": 60}, {"id": "min-valoria", "name": "Valoria", "type": "minor-city", "x": 47, "y": 53}, {"id": "min-aftica", "name": "Aftica", "type": "minor-city", "x": 56, "y": 64}, {"id": "min-stavrod", "name": "Stavrod", "type": "minor-city", "x": 38, "y": 70}, {"id": "min-ryn-gara", "name": "Ryn Gara", "type": "minor-city", "x": 30, "y": 86}, {"id": "min-limbo", "name": "Limbo", "type": "isle", "x": 30, "y": 80}, {"id": "min-naumacos", "name": "Naumacos", "type": "minor-city", "x": 53, "y": 78}, {"id": "min-archeodaxa", "name": "Montagna di Archeodaxa", "type": "mountain", "x": 46, "y": 75}, {"id": "feat-lago-rosso", "name": "Lago Rosso", "type": "lake", "x": 32, "y": 21}, {"id": "feat-dhaahr", "name": "il Dhaahr", "type": "region", "x": 30, "y": 35}, {"id": "feat-umihebinosy", "name": "Umihebinosy", "type": "region", "x": 49, "y": 43}, {"id": "feat-altin-qusaq", "name": "Altin Qusaq", "type": "region", "x": 45, "y": 88}, {"id": "feat-mare-stretto", "name": "Mare Stretto", "type": "sea", "x": 44, "y": 60}, {"id": "feat-mare-syllian", "name": "Mare di Syllian", "type": "sea", "x": 75, "y": 31}, {"id": "feat-golfo-istid", "name": "Golfo di Istid", "type": "sea", "x": 71, "y": 22}, {"id": "feat-golfo-fatvo", "name": "Golfo Fatvo", "type": "sea", "x": 39, "y": 79}, {"id": "feat-baia-naumacos", "name": "Baia di Naumacos", "type": "sea", "x": 60, "y": 81}];
 const W = 100, H = 100;
 const map = L.map('vastria-map', {
-  crs: L.CRS.Simple, minZoom: -2, maxZoom: 4, zoomSnap: 0.25,
-  attributionControl: false
+  crs: L.CRS.Simple,
+  minZoom: -3, maxZoom: 5,
+  zoomSnap: 0.25, zoomDelta: 0.5,
+  scrollWheelZoom: true,
+  doubleClickZoom: true,
+  touchZoom: true,
+  zoomControl: true,
+  attributionControl: false,
+  wheelPxPerZoomLevel: 80
 });
 const bounds = [[0, 0], [H, W]];
 L.imageOverlay('mappe/vastria.jpg', bounds).addTo(map);
-map.fitBounds(bounds);
-map.setMaxBounds([[-20, -20], [H+20, W+20]]);
+map.fitBounds(bounds, {padding: [20, 20]});
+map.setMaxBounds([[-30, -30], [H+30, W+30]]);
+
 function ll(x, y) { return [H - y, x]; }
 function fromLL(latlng) { return { x: +(latlng.lng).toFixed(2), y: +(H - latlng.lat).toFixed(2) }; }
 
-// Carica posizioni salvate da localStorage (se presenti)
-let cities = JSON.parse(JSON.stringify(initialCities));
-const saved = localStorage.getItem('vastria-coords');
+// load saved
+let labels = JSON.parse(JSON.stringify(initialLabels));
+const saved = localStorage.getItem('vastria-coords-v2');
 if (saved) {
   try {
     const obj = JSON.parse(saved);
-    cities.forEach(c => { if (obj[c.name]) { c.x = obj[c.name].x; c.y = obj[c.name].y; } });
-  } catch (e) { console.warn('saved coords corrupted'); }
+    labels.forEach(l => { if (obj[l.id]) { l.x = obj[l.id].x; l.y = obj[l.id].y; } });
+  } catch (e) {}
 }
 
-const cityLayer = L.layerGroup().addTo(map);
-const cityMarkers = {};
+const markers = {};
 
-function buildIcon(c) {
-  return L.divIcon({
-    className: '',
-    html: `<a class="city-marker" href="${c.href}" title="${c.name}"><span class="pin"></span>${c.name}</a>`,
-    iconSize: [120, 36], iconAnchor: [60, 30]
-  });
+function makeIcon(l) {
+  let inner;
+  if (l.type === 'city') {
+    inner = `<a class="lbl city clickable" href="${l.href}" title="${l.name} — ${l.info||''}"><span class="pin"></span>${l.name}</a>`;
+  } else if (l.type === 'minor-city' || l.type === 'isle' || l.type === 'mountain') {
+    inner = `<span class="lbl ${l.type}"><span class="pin"></span>${l.name}</span>`;
+  } else {
+    inner = `<span class="lbl ${l.type}">${l.name}</span>`;
+  }
+  // approx width by name length
+  const w = Math.max(60, l.name.length * 9);
+  return L.divIcon({ className: '', html: inner, iconSize: [w, 24], iconAnchor: [w/2, 12] });
 }
 
-cities.forEach(c => {
-  const m = L.marker(ll(c.x, c.y), { icon: buildIcon(c), riseOnHover: true, draggable: false }).addTo(cityLayer);
-  m.bindPopup(`<h3>${c.name}</h3><span class="astro">${c.astro}</span><p class="desc">${c.desc}</p><a class="btn" href="${c.href}">Apri scheda →</a>`);
-  cityMarkers[c.name] = { marker: m, data: c };
+labels.forEach(l => {
+  const m = L.marker(ll(l.x, l.y), { icon: makeIcon(l), draggable: false, riseOnHover: true, interactive: true }).addTo(map);
+  if (l.type === 'city') {
+    m.bindPopup(`<h3>${l.name}</h3><span class="info">${l.info||''}</span><a class="btn" href="${l.href}">Apri scheda →</a>`);
+  }
   m.on('drag', () => {
-    const ll = m.getLatLng();
-    const pct = fromLL(ll);
-    c.x = pct.x; c.y = pct.y;
+    const p = fromLL(m.getLatLng());
+    l.x = p.x; l.y = p.y;
     refreshPanel();
   });
   m.on('dragend', () => persist());
+  markers[l.id] = m;
 });
 
-minor.forEach(mn => {
-  const cls = `minor-label ${mn.kind}`;
-  const showPin = (mn.kind === 'city' || mn.kind === 'isle');
-  const html = (showPin ? `<span class="pin-small"></span>` : '') + mn.name;
-  const icon = L.divIcon({ className: '', html: `<span class="${cls}">${html}</span>`, iconSize: [180, 18], iconAnchor: [90, 9] });
-  L.marker(ll(mn.x, mn.y), { icon, interactive: false }).addTo(map);
-});
+setTimeout(() => map.fitBounds(bounds, {padding: [20, 20]}), 100);
 
-setTimeout(() => map.fitBounds(bounds), 100);
-
-// === Edit mode toggle ===
+// === edit toggle ===
 const editBtn = document.getElementById('toggle-edit');
-const panel = document.getElementById('edit-panel');
 const list = document.getElementById('coord-list');
 const jsonOut = document.getElementById('json-out');
 const status = document.getElementById('copy-status');
+const filterInp = document.getElementById('filter');
 
 editBtn.addEventListener('click', () => {
   const on = !document.body.classList.contains('editmode');
   document.body.classList.toggle('editmode', on);
   editBtn.classList.toggle('active', on);
   editBtn.textContent = on ? '✓ Edit ON · clicca per uscire' : '✏️ Modalità edit';
-  Object.values(cityMarkers).forEach(({marker}) => {
-    if (on) marker.dragging.enable();
-    else marker.dragging.disable();
+  Object.values(markers).forEach(m => {
+    if (on) m.dragging.enable();
+    else m.dragging.disable();
   });
   if (on) refreshPanel();
 });
 
+document.getElementById('btn-fit').addEventListener('click', () => map.fitBounds(bounds, {padding: [20, 20]}));
+
+const TYPE_GROUP = { city: 'Città principali (15)', 'minor-city': 'Località minori', isle: 'Isole', mountain: 'Montagne', region: 'Regioni', sea: 'Mari/golfi', lake: 'Laghi' };
+const TYPE_ORDER = ['city', 'minor-city', 'isle', 'mountain', 'region', 'sea', 'lake'];
+
 function refreshPanel() {
+  const flt = filterInp.value.toLowerCase();
   list.innerHTML = '';
-  cities.forEach(c => {
-    const init = initialCities.find(x => x.name === c.name);
-    const dirty = (init.x !== c.x || init.y !== c.y);
-    const row = document.createElement('div');
-    row.className = 'row' + (dirty ? ' dirty' : '');
-    row.innerHTML = `<b>${c.name}</b>: x=${c.x.toFixed(1)}, y=${c.y.toFixed(1)}` + (dirty ? ` <small>(era ${init.x}, ${init.y})</small>` : '');
-    list.appendChild(row);
+  TYPE_ORDER.forEach(t => {
+    const group = labels.filter(l => l.type === t && l.name.toLowerCase().includes(flt));
+    if (group.length === 0) return;
+    const gh = document.createElement('div');
+    gh.className = 'row group-title';
+    gh.textContent = `── ${TYPE_GROUP[t]} (${group.length})`;
+    list.appendChild(gh);
+    group.forEach(l => {
+      const init = initialLabels.find(x => x.id === l.id);
+      const dirty = (init.x !== l.x || init.y !== l.y);
+      const r = document.createElement('div');
+      r.className = 'row' + (dirty ? ' dirty' : '');
+      r.innerHTML = `<b>${l.name}</b>: ${l.x.toFixed(1)}, ${l.y.toFixed(1)}` + (dirty ? ` <small>(era ${init.x}, ${init.y})</small>` : '');
+      list.appendChild(r);
+    });
   });
-  // build JSON
-  const out = cities.map(c => ({ name: c.name, x: c.x, y: c.y }));
-  jsonOut.value = JSON.stringify(out, null, 2);
+  jsonOut.value = JSON.stringify(labels.map(l => ({ id: l.id, name: l.name, type: l.type, x: l.x, y: l.y })), null, 2);
 }
+
+filterInp.addEventListener('input', refreshPanel);
 
 function persist() {
   const obj = {};
-  cities.forEach(c => { obj[c.name] = { x: c.x, y: c.y }; });
-  localStorage.setItem('vastria-coords', JSON.stringify(obj));
-  status.textContent = '💾 Salvato nel browser ' + new Date().toLocaleTimeString();
+  labels.forEach(l => obj[l.id] = { x: l.x, y: l.y });
+  localStorage.setItem('vastria-coords-v2', JSON.stringify(obj));
+  status.textContent = '💾 Salvato ' + new Date().toLocaleTimeString();
   setTimeout(() => status.textContent = '', 3000);
 }
 
 document.getElementById('btn-copy').addEventListener('click', async () => {
   try {
     await navigator.clipboard.writeText(jsonOut.value);
-    status.textContent = '✓ JSON copiato negli appunti — incollalo in chat';
+    status.textContent = '✓ JSON copiato — incolla in chat per fissare';
     setTimeout(() => status.textContent = '', 5000);
-  } catch (e) { jsonOut.select(); document.execCommand('copy'); status.textContent = '✓ Copiato'; }
+  } catch (e) { jsonOut.select(); document.execCommand('copy'); }
 });
 
 document.getElementById('btn-save').addEventListener('click', persist);
 
 document.getElementById('btn-reset-coords').addEventListener('click', () => {
   if (!confirm('Ripristinare TUTTE le posizioni iniziali? Le modifiche locali andranno perse.')) return;
-  localStorage.removeItem('vastria-coords');
-  cities.forEach(c => {
-    const init = initialCities.find(x => x.name === c.name);
-    c.x = init.x; c.y = init.y;
-    cityMarkers[c.name].marker.setLatLng(ll(c.x, c.y));
+  localStorage.removeItem('vastria-coords-v2');
+  labels.forEach(l => {
+    const i = initialLabels.find(x => x.id === l.id);
+    l.x = i.x; l.y = i.y;
+    markers[l.id].setLatLng(ll(l.x, l.y));
   });
   refreshPanel();
-  status.textContent = '↺ Posizioni iniziali ripristinate';
-  setTimeout(() => status.textContent = '', 3000);
-});
-
-document.getElementById('btn-reset').addEventListener('click', () => {
-  map.fitBounds(bounds);
 });
 
 refreshPanel();
