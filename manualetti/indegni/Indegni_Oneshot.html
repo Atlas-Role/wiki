@@ -380,66 +380,20 @@ tr:nth-child(even) td{background:rgba(168,123,44,.06);}
   .page{margin:0;box-shadow:none;border:none;page-break-after:always;}
 }
 
-
 /* ===== STAMPA A4 ===== */
 @page { size: A4; margin: 0; }
 @media print {
-  html, body {
-    margin: 0; padding: 0;
-    background: white !important;
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-  }
-  .page {
-    max-width: none !important;
-    width: 210mm !important;
-    min-height: 297mm !important;
-    margin: 0 !important;
-    padding: 16mm 18mm !important;
-    border: none !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-    box-sizing: border-box !important;
-    page-break-after: always !important;
-    break-after: page !important;
-    /* NIENTE height fisso, NIENTE overflow hidden: contenuto fluido */
-  }
-  /* Cover deve invece stare esatta in una sola pagina A4 */
-  .page.cover {
-    padding: 0 !important;
-    width: 210mm !important;
-    height: 297mm !important;
-    min-height: 297mm !important;
-    max-height: 297mm !important;
-    overflow: hidden !important;
-    page-break-after: always !important;
-  }
-  .page:last-child {
-    page-break-after: auto !important;
-    break-after: auto !important;
-  }
-  /* Evita break interni nei componenti */
-  .statblock, .handout, .readaloud, .dmbox, .secret {
-    page-break-inside: avoid !important;
-    break-inside: avoid !important;
-  }
-  /* Evita orphan titoli da soli a fondo pagina */
+  html, body { margin: 0; padding: 0; background: white !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  .page { max-width: none !important; width: 210mm !important; min-height: 297mm !important; margin: 0 !important; padding: 16mm 18mm !important; border: none !important; border-radius: 0 !important; box-shadow: none !important; box-sizing: border-box !important; page-break-after: always !important; break-after: page !important; }
+  .page.cover { padding: 0 !important; width: 210mm !important; height: 297mm !important; min-height: 297mm !important; max-height: 297mm !important; overflow: hidden !important; page-break-after: always !important; }
+  .page:last-child { page-break-after: auto !important; break-after: auto !important; }
+  .statblock, .handout, .readaloud, .dmbox, .secret, .scene { page-break-inside: avoid !important; break-inside: avoid !important; }
   h1, h2, h3 { page-break-after: avoid !important; break-after: avoid !important; }
 }
-@media screen { html, body { background: #2a1f12; } }
 
 </style>
 
-<style>
-.cover{min-height:auto;}
-.scene{position:static;overflow:visible;}
-.scene .fg, .scene .scene-caption, .scene .scene-title{position:static;display:block;}
-.scene .bg{width:100%;height:auto;display:block;}
 
-
-
-.dropcap::first-letter{font-size:2em;float:none;padding:0;}
-</style>
 </head>
 <body>
 
@@ -448,6 +402,7 @@ tr:nth-child(even) td{background:rgba(168,123,44,.06);}
   <div class="cover-art" style="background-image:url(img/cover.png);"></div>
   <div class="westmarch-mark">WESTMARCH · ATLAS ROLE</div>
 </section>
+
 
 <!-- ============ IL PERSONAGGIO — TARANOR ============ -->
 <section class="page">
@@ -562,6 +517,7 @@ tr:nth-child(even) td{background:rgba(168,123,44,.06);}
 
   <div class="flourish"></div>
 </section>
+
 
 
 <!-- ============================ INDICE / PREFAZIONE ============================ -->
@@ -762,8 +718,6 @@ tr:nth-child(even) td{background:rgba(168,123,44,.06);}
   <h4>Durata stimata: 30 minuti · Scena di apertura, roleplay puro</h4>
 
   <h3>Scena 1.1 — La Veglia di Anastasia</h3>
-  <div class="portrait-right"><img src="img/anastasia_cutout.png" alt="Anastasia D'Alfiero"><div class="caption" style="text-align:center;font-family:'IM Fell English SC',serif;font-size:.85em;color:var(--ink-soft);margin-top:4px;">Anastasia D'Alfiero</div></div>
-
 
   <div class="scene">
     <img class="bg" src="img/studio_anastasia.png" alt="Studio di Anastasia a Nakahi">
@@ -794,8 +748,6 @@ tr:nth-child(even) td{background:rgba(168,123,44,.06);}
   </div>
 
   <h3>Scena 1.2 — L'Arrivo di Christofer Rage</h3>
-  <div class="portrait-right"><img src="img/rage_cutout.png" alt="Capitano Christofer Rage"><div class="caption" style="text-align:center;font-family:'IM Fell English SC',serif;font-size:.85em;color:var(--ink-soft);margin-top:4px;">Capitano Christofer Rage</div></div>
-
 
   <div class="scene">
     <img class="bg" src="img/studio_anastasia.png" alt="Studio di Anastasia">
@@ -865,8 +817,6 @@ tr:nth-child(even) td{background:rgba(168,123,44,.06);}
   <h4>Durata stimata: 45 minuti · Roleplay e briefing, esplorazione minimale</h4>
 
   <h3>Scena 2.1 — L'Aula d'Udienza</h3>
-  <div class="portrait-right"><img src="img/emissario_cutout.png" alt="L'Emissario della Cuspide"><div class="caption" style="text-align:center;font-family:'IM Fell English SC',serif;font-size:.85em;color:var(--ink-soft);margin-top:4px;">L'Emissario della Cuspide</div></div>
-
 
   <div class="img-frame">
     <img src="img/aula_cuspide.png" alt="Mappa della Sala d'Udienza alla Cuspide">
@@ -1012,10 +962,6 @@ tr:nth-child(even) td{background:rgba(168,123,44,.06);}
   <h4>Durata stimata: 60 minuti · Roleplay drammatico, combattimento solo se necessario</h4>
 
   <h3>Scena 4.1 — L'Apparizione</h3>
-  <div class="portrait-right"><img src="img/suriel_cutout.png" alt="Suriel Alhagal — il padre Solar"><div class="caption" style="text-align:center;font-family:'IM Fell English SC',serif;font-size:.85em;color:var(--ink-soft);margin-top:4px;">Suriel Alhagal — il padre Solar</div></div>
-
-  <div class="portrait-left"><img src="img/vaeloth_cutout.png" alt="Vaeloth Alhagal — il fratello Deva"><div class="caption" style="text-align:center;font-family:'IM Fell English SC',serif;font-size:.85em;color:var(--ink-soft);margin-top:4px;">Vaeloth Alhagal — il fratello Deva</div></div>
-
 
   <div class="scene">
     <img class="bg" src="img/santuario_due_sedie.png" alt="Santuario delle Due Sedie">
@@ -1406,7 +1352,6 @@ tr:nth-child(even) td{background:rgba(168,123,44,.06);}
     Manuale curato per la sessione del 17/05/2026
   </div>
 </section>
-
 
 <!-- ============ COLONNA SONORA ============ -->
 <section class="page">
